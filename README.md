@@ -1,3 +1,1 @@
-# Project1
-
-Group Members: Keyla, Enid, Marcus and Omar
+omiinaya.github.io/project-1-scripts

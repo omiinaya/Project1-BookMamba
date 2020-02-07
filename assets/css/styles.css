@@ -1,0 +1,40 @@
+.barlow-font {
+    font-family: 'Barlow', sans-serif;
+}
+
+.caption {
+    padding-left: 34px;
+}
+
+.is-mustard {
+    color: #c1ad1e;
+}
+
+.bgrd-is-mustard {
+    background-color: #c1ad1e;
+}
+
+.hero {
+    background-image: url(../images/book-mamba-background-01.png);
+    background-position: center center;
+        background-repeat:  no-repeat;
+        background-attachment: fixed;
+        background-size:  cover;
+}
+
+.logo {
+    padding-top: 20px;
+    max-width: 195px;
+}
+
+.hero-body {
+    padding: 3rem 0;
+}
+
+*{
+    box-sizing: border-box
+}
+.columns,
+.columns:last-child {
+    margin: 0
+}
