@@ -22,7 +22,7 @@
     <!--<script src="https://openlibrary.org/api/books?bibkeys=ISBN:0451526538&callback=mycallback"></script>-->
 
 </head>
-<body onload=quotesAjax()>
+<body onload=loadPage()>
 
     <section class="hero is-dark is-fullheight">
         <!-- Hero head: will stick at the top -->
@@ -78,7 +78,7 @@
                     <div class="book-info column is-6">
                           <h1 class="title is-1 has-text-left serif is-red" id="bookTitle">Dracula</h1>
                         <h2 class="subtitle is-5 has-text-left has-text-black-bis"><span>Author: </span><span id="authorSpan"></span><span> | Published: </span><span id="publishedDate"></span><span> | Rating: </span><span id="rating"></span></h2>
-                          <p class= "has-text-left has-text-grey-darker">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                          <p class= "has-text-left has-text-grey-darker" id="descriptionText"></p>
                           <div class="buttons is-left has-padding-20">
                             <a class="buy-button button is-rounded bgrd-is-red has-text-white-bis">BUY</a>
                           </div>
@@ -89,7 +89,7 @@
                           <!--here goes the button to display the next book-->
                           <div class="column is-2">
                         
-                            <i class="fa fa-chevron-right fa-10x" style="color: black;"></i>
+                            <i class="fa fa-chevron-right fa-10x" id="nextBtn" onclick=nextBook() style="color: black;"></i>
                             <div class="next-text" id="nextBook">
                                 <p>NOT INTERESTED?</p>
                                 <p>VIEW ANOTHER BOOK</p>

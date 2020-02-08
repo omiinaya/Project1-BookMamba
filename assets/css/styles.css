@@ -1,4 +1,6 @@
-
+#nextBtn:hover{
+    cursor: pointer;
+}
 
 .barlow-font {
     font-family: 'Barlow', sans-serif;
@@ -74,4 +76,4 @@
 .serif {
     font-family: 'Source Serif Pro', serif;
     }
-    .
+    
