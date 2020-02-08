@@ -27,7 +27,13 @@
     display: inline-block;
     vertical-align: middle;
 }
+#bookTitle {
+    color:#BA1A11
+}
 
+.book-info p {
+    
+}
 img {
     max-width: 100%;
     height: auto;
