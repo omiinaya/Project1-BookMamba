@@ -1,3 +1,5 @@
+
+
 .barlow-font {
     font-family: 'Barlow', sans-serif;
 }
@@ -9,6 +11,38 @@
 .is-mustard {
     color: #c1ad1e;
 }
+
+.hero-quote {
+    color: #c1ad1e;
+    font-family: 'Barlow', sans-serif;
+    text-align: center;
+}
+.next-text {
+    color: black;
+    font-weight: 600;   
+}
+
+.hero-quote p {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.image {
+    width: 240px;
+    height: 640px;
+    height: auto;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}
+
+
 
 .bgrd-is-mustard {
     background-color: #c1ad1e;
