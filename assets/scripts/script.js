@@ -51,10 +51,22 @@ var userInput = "";
 
              });
             }
-         function testNext() {
+
+            //creating function for next button to display next book using Omar's random variable (a)
+         function nextBook() {
              console.log(responseTest);
              var a = [Math.floor(Math.random()*responseTest.items.length)]
+             $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
+             $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
+             $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
+             $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
+
+             //getting book cover image
+             $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
+
          }
+
+         
 //keyla's code starts here
 
     
