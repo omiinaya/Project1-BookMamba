@@ -17,19 +17,19 @@
 
     <!--Custom css-->
     <link rel="stylesheet" href="assets/css/styles.css">
-     <!-- <link rel="stylesheet" href="debug.css"> --> 
+     <!-- <link rel="stylesheet" href="assets/css/debug.css">  -->
 
     <!--<script src="https://openlibrary.org/api/books?bibkeys=ISBN:0451526538&callback=mycallback"></script>-->
 
 </head>
-<body onload="setChoice()">
+<body>
 
     <section class="hero is-dark is-fullheight">
         <!-- Hero head: will stick at the top -->
         <div class="hero-head">
             <div class="container">
-                <div class="columns is-vcentered ">
-                    <div class="column">
+                <div class="columns is-vcentered">
+                    <div class="column is-2">
                         <figure class="image left">
                             <img src="assets/images/book-mamba-logo_195x82.png" class="logo" alt="Welcome to book mamba, the fiercest book search engine in the web">
                         </figure>
@@ -41,7 +41,7 @@
                        
                             <div class="field has-addons">
                                 <div class="control is-expanded"> 
-                                    <input class="input is-rounded" type="text" id="search-bar" placeholder="Please enter a book title." size="80">
+                                    <input class="input is-rounded" type="text" id="search-bar" placeholder="Please enter a book title.">
                                 </div>
                                 <div class="control">
                                     <button class="button is-rounded bgrd-is-mustard" id="search-button" onclick="runAjax()"><i class="fas fa-search"></i></button>
@@ -52,9 +52,12 @@
                 </div>
             </div>
         </div>
-      <div class="hero-quote">
-        <div class="column is-12">
-            <p id="qoute">The text here is a place holder for a quote </p>
+      <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column is-10 is-offset-2 serif is-mustard">
+            <p id="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p id="quote-author">-Author </p>
+            </div>
         </div>
     </div>
       </div>
@@ -63,25 +66,22 @@
 
         <!-- Hero content: will be in the middle -->
         <div class="hero-body">
-
-            <p id="quote-text"></p><p id="quote-author"><p></p>
-
-            <div class="hero-body bgrd-is-mustard">
+                        <div class="hero-body bgrd-is-mustard">
                 <div class="container has-text-centered">
                   <div class="columns ">
                     <div class="column is-offset-2">
                         <figure class="image image is-3by4">
-                            <img src="assets/images/480x640_placeholder.png">
+                            <img id="bookCover" alt="Book Cover"src="assets/images/480x640_placeholder.png">
                           </figure>
                     </div>
                     <!--book info from API goes here-->
                     <div class="book-info column is-6">
-                          <h1 class="title is-1 has-text-left" id="bookTitle">Dracula</h1>
-                          <h2 class="subtitle is-5 has-text-left" id="bookDetails">Author: Juliana James | Published: 1897 | Rating: 4/5</h2>
-                          <span>Author: </span><span id=authorSpan></span><span> | Published: </span><span id=publishDate></span><span> | Rating: </span><span id=rating></span>
+                          <h1 class="title is-1 has-text-left serif is-red" id="bookTitle">Dracula</h1>
+                        <h2 class="subtitle is-5 has-text-left has-text-black-bis"><span>Author: </span><span id=authorSpan></span><span> | Published: </span><span id=publishDate></span><span> | Rating: </span><span id=rating></span></h2>
                           <p class= "has-text-left has-text-grey-darker">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                          <a class="button has-text-left is-danger is-rounded">BUY</a>
-
+                          <div class="buttons is-left has-padding-20">
+                            <a class="buy-button button is-rounded bgrd-is-red has-text-white-bis">BUY</a>
+                          </div>
 
                         
                     </div>
@@ -90,7 +90,7 @@
                           <div class="column is-2">
                         
                             <i class="fa fa-chevron-right fa-10x" style="color: black;"></i>
-                            <div class="next-text">
+                            <div class="next-text" id="nextBook">
                                 <p>NOT INTERESTED?</p>
                                 <p>VIEW ANOTHER BOOK</p>
                             </div>
