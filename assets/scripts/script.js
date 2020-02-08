@@ -1,7 +1,7 @@
 //declaring a global variable of userInput that we can change and use from anywhere in the script.
 var userInput = "";
 //declaring default value of testURL to be our URL based on titles.
-var testURL = "http://openlibrary.org/search.json?title="+userInput;
+var testURL = "https://www.googleapis.com/books/v1/volumes?q="+ userInput;
 
 function setChoice() {
     if (document.querySelector('input[id="title-button"]:checked')) {
