@@ -27,26 +27,17 @@
     display: inline-block;
     vertical-align: middle;
 }
-#bookTitle {
-    color:#BA1A11
+.is-red {
+    color:#BA1A11 !important
 }
 
-.book-info p {
-    
-}
-img {
-    max-width: 100%;
-    height: auto;
+.bgrd-is-red {
+    background-color:#BA1A11
 }
 
-.image {
-    width: 240px;
-    height: 640px;
-    height: auto;
-    float: left;
-    margin: 3px;
-    padding: 3px;
-}
+
+
+
 
 
 
@@ -67,6 +58,7 @@ img {
     max-width: 195px;
 }
 
+
 .hero-body {
     padding: 3rem 0;
 }
@@ -78,3 +70,8 @@ img {
 .columns:last-child {
     margin: 0
 }
+
+.serif {
+    font-family: 'Source Serif Pro', serif;
+    }
+    .
