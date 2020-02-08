@@ -53,7 +53,7 @@ var userInput = "";
             }
 
             //creating function for next button to display next book using Omar's random variable (a)
-         function nextBook() {
+        function nextBook() {
              console.log(responseTest);
              var a = [Math.floor(Math.random()*responseTest.items.length)]
              $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
@@ -66,7 +66,39 @@ var userInput = "";
 
          }
 
-         
+
+         function defaultDracula()
+          {
+          var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
+          $.ajax({
+          url: testURL,
+          method: "GET"
+          }).then(function(response) {
+          console.log(response)
+          responseTest = response;
+          //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
+          console.log(response);
+          $("#bookTitle").html(response.items[1].volumeInfo.title);
+          $("#authorSpan").text(response.items[1].volumeInfo.authors);
+          $("#publishedDate").text(response.items[1].volumeInfo.publishedDate);
+          $("#rating").text(response.items[1].volumeInfo.averageRating);
+
+          //getting book cover image
+          $("#bookCover").attr("src",response.items[1].volumeInfo.imageLinks.thumbnail);
+
+         //getting description to show bellow details section
+         var a = [Math.floor(Math.random()*responseTest.items.length)]
+          $("#descriptionText").text(response.items[a].volumeInfo.description);
+
+
+          });
+         }
+
+         function loadPage()
+         {
+          defaultDracula()
+          quotesAjax()
+         }
 //keyla's code starts here
 
     
