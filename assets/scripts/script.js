@@ -48,7 +48,7 @@ var userInput = "";
 
              //getting book cover image
              $("#bookCover").attr("src",response.items[0].volumeInfo.imageLinks.thumbnail);
-
+             $("#descriptionText").text(responseTest.items[0].volumeInfo.description);
              });
             }
 
