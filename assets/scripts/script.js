@@ -21,8 +21,8 @@ var userInput = "";
          
          console.log(response);
          //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
-         $("#quote-author").text(response.contents.author);
-         $("#quote-text").text(response.contents.quote);
+         $("#quote-author").text("-"+response.contents.author);
+         $("#quote-text").text('"'+response.contents.quote+'"');
          });
         }
 //Keyla's code ends here//
@@ -61,8 +61,9 @@ var userInput = "";
              $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
              $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
 
-             //getting book cover image
+             //getting book cover image and description to display in details
              $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
+             $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
 
          }
 
@@ -78,21 +79,21 @@ var userInput = "";
           responseTest = response;
           //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
           console.log(response);
-          $("#bookTitle").html(response.items[1].volumeInfo.title);
-          $("#authorSpan").text(response.items[1].volumeInfo.authors);
-          $("#publishedDate").text(response.items[1].volumeInfo.publishedDate);
-          $("#rating").text(response.items[1].volumeInfo.averageRating);
+          var a = [Math.floor(Math.random()*responseTest.items.length)]
+          $("#bookTitle").html(response.items[a].volumeInfo.title);
+          $("#authorSpan").text(response.items[a].volumeInfo.authors);
+          $("#publishedDate").text(response.items[a].volumeInfo.publishedDate);
+          $("#rating").text(response.items[a].volumeInfo.averageRating);
 
           //getting book cover image
-          $("#bookCover").attr("src",response.items[1].volumeInfo.imageLinks.thumbnail);
-
+          $("#bookCover").attr("src",response.items[a].volumeInfo.imageLinks.thumbnail);
+          
          //getting description to show bellow details section
-         var a = [Math.floor(Math.random()*responseTest.items.length)]
           $("#descriptionText").text(response.items[a].volumeInfo.description);
 
 
           });
-         }
+        }
 
          function loadPage()
          {
