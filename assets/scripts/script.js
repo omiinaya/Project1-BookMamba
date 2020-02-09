@@ -11,7 +11,7 @@ var userInput = "";
 //Keyla's code starts here//
 
          //works perfectly for random authors
-         var queryURL = "http://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
+         var queryURL = "http://quotes.rest/quote/random.json?&minlength=100&maxlength=200&api_key=c9kZNAbwJv_8tdUeQinJMQeF"
          //we bought a key, but aren't using it-----> api_key=c9kZNAbwJv_8tdUeQinJMQeF
          function quotesAjax(){
          $.ajax({
