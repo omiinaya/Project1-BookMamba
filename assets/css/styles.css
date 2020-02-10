@@ -1,34 +1,26 @@
-#nextBtn:hover{
-    cursor: pointer;
+body {
+    background-image: url(../images/book-mamba-background-01.png);
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #363636;
+}
+
+/* FONTS */
+.serif {
+    font-family: 'Source Serif Pro', serif;
 }
 
 .barlow-font {
     font-family: 'Barlow', sans-serif;
 }
 
-.caption {
-    padding-left: 34px;
-}
-
+/* COLORS */
 .is-mustard {
     color: #c1ad1e;
 }
 
-.hero-quote {
-    color: #c1ad1e;
-    font-family: 'Barlow', sans-serif;
-    text-align: center;
-}
-.next-text {
-    color: black;
-    font-weight: 600;   
-}
-
-.hero-quote p {
-    line-height: 1.5;
-    display: inline-block;
-    vertical-align: middle;
-}
 .is-red {
     color:#BA1A11 !important
 }
@@ -37,43 +29,25 @@
     background-color:#BA1A11
 }
 
-
-
-
-
-
-
 .bgrd-is-mustard {
     background-color: #c1ad1e;
 }
 
-.hero {
-    background-image: url(../images/book-mamba-background-01.png);
-    background-position: center center;
-        background-repeat:  no-repeat;
-        background-attachment: fixed;
-        background-size:  cover;
-}
-
+/* GENERAL STYLES */
 .logo {
     padding-top: 20px;
     max-width: 195px;
 }
 
-
-.hero-body {
-    padding: 3rem 0;
+#nextBtn:hover{
+    cursor: pointer;
 }
 
-*{
-    box-sizing: border-box
-}
-.columns,
-.columns:last-child {
-    margin: 0
+.buy-button  {
+    border: none;
+    margin-top: 1.5rem;
 }
 
-.serif {
-    font-family: 'Source Serif Pro', serif;
-    }
-    
+#bookCover {
+    padding-right: 20px;
+}
