@@ -13,7 +13,7 @@ var userInput = "";
          //works perfectly for random authors
          var queryURL = "http://quotes.rest/quote/random.json?&minlength=100&maxlength=200&api_key=c9kZNAbwJv_8tdUeQinJMQeF"
          //we bought a key, but aren't using it-----> api_key=c9kZNAbwJv_8tdUeQinJMQeF
-         function quotesAjax(){
+     function quotesAjax(){
          $.ajax({
            url: queryURL,
            method: "GET"
@@ -25,10 +25,12 @@ var userInput = "";
          $("#quote-text").text('"'+response.contents.quote+'"');
          });
         }
+        
 //Keyla's code ends here//
          
          
-         
+  //Omar's code starts here//
+
          //declaring default value of testURL to be our URL based on titles.
          function runAjax() {
              userInput = $("#search-bar").val();
@@ -39,7 +41,13 @@ var userInput = "";
              }).then(function(response) {
              console.log(response)
              responseTest = response;
-             //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
+             
+             
+  //Omar's code ends here//
+
+  //Keyla's code starts here
+
+             //displaying book details
              console.log(response);
              $("#bookTitle").html(response.items[0].volumeInfo.title);
              $("#authorSpan").text(response.items[0].volumeInfo.authors);
@@ -68,7 +76,7 @@ var userInput = "";
          }
 
 
-         function defaultDracula()
+       function defaultDracula()
           {
           var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
           $.ajax({
@@ -95,11 +103,11 @@ var userInput = "";
           });
         }
 
-         function loadPage()
+     function loadPage()
          {
           defaultDracula()
           quotesAjax()
          }
-//keyla's code starts here
+//keyla's code ends here
 
     
