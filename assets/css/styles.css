@@ -2,6 +2,15 @@
     cursor: pointer;
 }
 
+#quote-author{
+    margin-top:5px;
+    text-align:right;
+}
+
+#buyBtn{
+    margin-top:20px;
+}
+
 .barlow-font {
     font-family: 'Barlow', sans-serif;
 }

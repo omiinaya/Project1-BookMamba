@@ -11,9 +11,9 @@ var userInput = "";
 //Keyla's code starts here//
 
          //works perfectly for random authors
-         var queryURL = "http://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
+         var queryURL = "http://quotes.rest/quote/random.json?&minlength=100&maxlength=200&api_key=c9kZNAbwJv_8tdUeQinJMQeF"
          //we bought a key, but aren't using it-----> api_key=c9kZNAbwJv_8tdUeQinJMQeF
-         function quotesAjax(){
+     function quotesAjax(){
          $.ajax({
            url: queryURL,
            method: "GET"
@@ -21,14 +21,16 @@ var userInput = "";
          
          console.log(response);
          //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
-         $("#quote-author").text(response.contents.author);
-         $("#quote-text").text(response.contents.quote);
+         $("#quote-author").text("-"+response.contents.author);
+         $("#quote-text").text('"'+response.contents.quote+'"');
          });
         }
+        
 //Keyla's code ends here//
          
          
-         
+  //Omar's code starts here//
+
          //declaring default value of testURL to be our URL based on titles.
          function runAjax() {
              userInput = $("#search-bar").val();
@@ -39,7 +41,13 @@ var userInput = "";
              }).then(function(response) {
              console.log(response)
              responseTest = response;
-             //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
+             
+             
+  //Omar's code ends here//
+
+  //Keyla's code starts here
+
+             //displaying book details
              console.log(response);
              $("#bookTitle").html(response.items[0].volumeInfo.title);
              $("#authorSpan").text(response.items[0].volumeInfo.authors);
@@ -48,7 +56,7 @@ var userInput = "";
 
              //getting book cover image
              $("#bookCover").attr("src",response.items[0].volumeInfo.imageLinks.thumbnail);
-
+             $("#descriptionText").text(responseTest.items[0].volumeInfo.description);
              });
             }
 
@@ -61,13 +69,14 @@ var userInput = "";
              $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
              $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
 
-             //getting book cover image
+             //getting book cover image and description to display in details
              $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
+             $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
 
          }
 
 
-         function defaultDracula()
+       function defaultDracula()
           {
           var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
           $.ajax({
@@ -78,27 +87,27 @@ var userInput = "";
           responseTest = response;
           //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
           console.log(response);
-          $("#bookTitle").html(response.items[1].volumeInfo.title);
-          $("#authorSpan").text(response.items[1].volumeInfo.authors);
-          $("#publishedDate").text(response.items[1].volumeInfo.publishedDate);
-          $("#rating").text(response.items[1].volumeInfo.averageRating);
+          var a = [Math.floor(Math.random()*responseTest.items.length)]
+          $("#bookTitle").html(response.items[a].volumeInfo.title);
+          $("#authorSpan").text(response.items[a].volumeInfo.authors);
+          $("#publishedDate").text(response.items[a].volumeInfo.publishedDate);
+          $("#rating").text(response.items[a].volumeInfo.averageRating);
 
           //getting book cover image
-          $("#bookCover").attr("src",response.items[1].volumeInfo.imageLinks.thumbnail);
-
+          $("#bookCover").attr("src",response.items[a].volumeInfo.imageLinks.thumbnail);
+          
          //getting description to show bellow details section
-         var a = [Math.floor(Math.random()*responseTest.items.length)]
           $("#descriptionText").text(response.items[a].volumeInfo.description);
 
 
           });
-         }
+        }
 
-         function loadPage()
+     function loadPage()
          {
           defaultDracula()
           quotesAjax()
          }
-//keyla's code starts here
+//keyla's code ends here
 
     
