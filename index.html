@@ -17,96 +17,82 @@
 
     <!--Custom css-->
     <link rel="stylesheet" href="assets/css/styles.css">
-     <!-- <link rel="stylesheet" href="assets/css/debug.css">  -->
-
-    <!--<script src="https://openlibrary.org/api/books?bibkeys=ISBN:0451526538&callback=mycallback"></script>-->
+    <!--<link rel="stylesheet" href="assets/css/debug.css">-->
 
 </head>
 <body onload=loadPage()>
 
-    <section class="hero is-dark is-fullheight">
-        <!-- Hero head: will stick at the top -->
-        <div class="hero-head">
-            <div class="container">
-                <div class="columns is-vcentered">
-                    <div class="column is-2">
-                        <figure class="image left">
-                            <img src="assets/images/book-mamba-logo_195x82.png" class="logo" alt="Welcome to book mamba, the fiercest book search engine in the web">
-                        </figure>
-                        <p class="subtitle has-text-white-ter is-size-7 is-uppercase barlow-font caption">find the most<br>popular<br>books & movies<br>of all times</p>
-                    </div>
-                    <div class="column has-text-centered is-10">
-                        <h2 class="is-size-9 is-uppercase barlow-font">Search for a book:</h2>
-                        <div class="control has-text-centered">
-                       
-                            <div class="field has-addons">
-                                <div class="control is-expanded"> 
-                                    <input class="input is-rounded" type="text" id="search-bar" placeholder="Please enter a book title.">
-                                </div>
-                                <div class="control">
-                                    <button class="button is-rounded bgrd-is-mustard" id="search-button" onclick="runAjax()"><i class="fas fa-search"></i></button>
-                                </div> 
+    <section class="section">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-2">
+                    <figure class="image left">
+                        <img src="assets/images/book-mamba-logo_195x82.png" class="logo" alt="Welcome to book mamba, the fiercest book search engine in the web">
+                    </figure>
+                    <p class="subtitle has-text-white-ter is-size-7 is-uppercase barlow-font caption">find the most<br>popular<br>books & movies<br>of all times</p>
+                </div>
+                <div class="column has-text-centered is-10">
+                    <h2 class="is-size-9 is-uppercase barlow-font has-text-white-bis">Search for a book:</h2>
+                    <div class="control has-text-centered">
+                        <div class="field has-addons">
+                            <div class="control is-expanded"> 
+                                <input class="input is-rounded" type="text" id="search-bar" placeholder="Please enter a book title.">
                             </div>
+                            <div class="control">
+                                <button class="button is-rounded bgrd-is-mustard" id="search-button" onclick="runAjax()"><i class="fas fa-search"></i></button>
+                            </div> 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      <div class="container">
-        <div class="columns is-vcentered">
-            <div class="column is-10 is-offset-2 serif is-mustard">
-            <p id="quote-text"></p>
-            <p id="quote-author"></p>
-            </div>
-        </div>
-    </div>
-      </div>
-
-
-
-        <!-- Hero content: will be in the middle -->
-        <div class="hero-body">
-                        <div class="hero-body bgrd-is-mustard">
-                <div class="container has-text-centered">
-                  <div class="columns ">
-                    <div class="column is-offset-2">
-                        <figure class="image image is-3by4">
-                            <img id="bookCover" alt="Book Cover"src="assets/images/480x640_placeholder.png">
-                          </figure>
-                    </div>
-                    <!--book info from API goes here-->
-                    <div class="book-info column is-6">
-                          <h1 class="title is-1 has-text-left serif is-red" id="bookTitle">Dracula</h1>
-                        <h2 class="subtitle is-5 has-text-left has-text-black-bis"><span>Author: </span><span id="authorSpan"></span><span> | Published: </span><span id="publishedDate"></span><span> | Rating: </span><span id="rating"></span></h2>
-                          <p class= "has-text-left has-text-grey-darker" id="descriptionText"></p>
-                          <div class="buttons is-left has-padding-20">
-                            <a class="buy-button button is-rounded bgrd-is-red has-text-white-bis" id= "buyBtn">BUY</a>
-                          </div>
-
-                        
-                    </div>
-                  
-                          <!--here goes the button to display the next book-->
-                          <div class="column is-2">
-                        
-                            <i class="fa fa-chevron-right fa-10x" id="nextBtn" onclick=nextBook() style="color: black;"></i>
-                            <div class="next-text" id="nextBook">
-                                <p>NOT INTERESTED?</p>
-                                <p>VIEW ANOTHER BOOK</p>
-                            </div>
-                    </div>
-                  </div>
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column serif is-offset-2 is-mustard is-size-5 has-text-centered">
+                    <p>"<span id="quote-text"></span>"</p> <!--We should generate the quotes and dash dynamically. ENID.-->
+                    <p>- <span id="quote-author"></span></p>
                 </div>
-              </div>
-        </div>
-      
-        <!-- Hero footer: will stick at the bottom -->
-        <div class="hero-foot">
-            <div class="container has-text-centered">
-                <p>Copyright Omar Minaya, Keyla Santoyo, Marcos Marti & Enid Soto</p> <a href="#">View the project on GitHub</a>
             </div>
         </div>
-      </section>
+    </section>
+
+    <section class="section bgrd-is-mustard">
+        <div class="container has-text-centered">
+            <div class="columns is-desktop is-vcentered">
+                <!-- <div class="column is-2">
+                    <figure class="image is-pulled-left">
+                        <img id="bookCover" alt="Book Cover" src="assets/images/480x640_placeholder.png" width="128" height="192">
+                    </figure>
+                </div> -->
+              <!--book info from API goes here-->
+                <div class="book-info column is-10">
+                    <figure class="image is-pulled-left">
+                        <img id="bookCover" alt="Book Cover" src="assets/images/480x640_placeholder.png" width="128" height="192">
+                    </figure>
+                    <h1 class="title is-3 has-text-left serif is-red" id="bookTitle">Dracula</h1>
+                    <h2 class="subtitle is-6 has-text-left has-text-black-bis"><span class="has-text-weight-bold">Author: </span><span id="authorSpan"></span><span class="has-text-weight-bold"> | Published: </span><span id="publishedDate"></span><span class="has-text-weight-bold"> | Rating: </span><span id="rating"></span></h2>
+                    <p class= "has-text-left has-text-grey-darker" id="descriptionText"></p>
+                    <div class="buttons is-left">
+                        <button class="buy-button button is-rounded bgrd-is-red has-text-white-bis is-small is-uppercase has-text-weight-bold">Buy Now</button>
+                    </div>
+                </div>
+                
+                <!--here goes the button to display the next book-->
+                <div class="column is-2">
+                    <div class="has-text-grey-dark is-uppercase" id="nextBtn" onclick=nextBook()>
+                        <i class="fas fa-angle-right is-size-1"></i>
+                        <p>View<br>Next</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="content has-text-centered"> 
+            <p>Copyright Omar Minaya, Keyla Santoyo, Marcos Marti & Enid Soto</p> <a href="#">View the project on GitHub</a>
+        </div>
+    </footer>
 
     <!--jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
