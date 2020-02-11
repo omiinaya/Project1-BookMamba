@@ -31,20 +31,20 @@ function ratingFilter() {
 
 function nextBook() {
   noRepeats()
-  console.log("test: "+random)
+  console.log("index/random value: "+random)
   $("#bookTitle").html(newArr[random].volumeInfo.title);
   $("#authorSpan").text(newArr[random].volumeInfo.authors);
   $("#publishedDate").text(newArr[random].volumeInfo.publishedDate);
   $("#rating").text(newArr[random].volumeInfo.averageRating);
-  $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
   $("#descriptionText").text(newArr[random].volumeInfo.description);
+  $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
 }
 
 function noRepeats() {
 while (random === lastrandom) {
   random = Math.floor(Math.random() * newArr.length);
   }
-lastrandom = random;
+  lastrandom = random;
 }
 
 //declaring default value of testURL to be our URL based on titles.
@@ -77,14 +77,14 @@ function quotesAjax(){
 }
 
 function defaultDracula() {
-var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
-$.ajax({
-url: testURL,
-method: "GET"
-}).then(function(response) {
-console.log(response)
-responseTest = response;
-ratingFilter()
-nextBook()    
-});
+  var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
+  $.ajax({
+  url: testURL,
+  method: "GET"
+  }).then(function(response) {
+  console.log(response)
+  responseTest = response;
+  ratingFilter()
+  nextBook()    
+  });
 }
