@@ -49,8 +49,8 @@
         <div class="container">
             <div class="columns is-vcentered">
                 <div class="column serif is-offset-2 is-mustard is-size-5 has-text-centered">
-                    <p>"<span id="quote-text"></span>"</p> <!--We should generate the quotes and dash dynamically. ENID.-->
-                    <p>- <span id="quote-author"></span></p>
+                    <p><span id="quote-text"></span></p>
+                    <p><span id="quote-author"></span></p>
                 </div>
             </div>
         </div>
@@ -59,11 +59,6 @@
     <section class="section bgrd-is-mustard">
         <div class="container has-text-centered">
             <div class="columns is-desktop is-vcentered">
-                <!-- <div class="column is-2">
-                    <figure class="image is-pulled-left">
-                        <img id="bookCover" alt="Book Cover" src="assets/images/480x640_placeholder.png" width="128" height="192">
-                    </figure>
-                </div> -->
               <!--book info from API goes here-->
                 <div class="book-info column is-10">
                     <figure class="image is-pulled-left">
@@ -87,6 +82,41 @@
             </div>
         </div>
     </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8 is-offset-2">
+                    <h1 class="title has-text-white-bis has-text-centered serif">Check out the top 3 NY Times best sellers for this week!</h1>
+                    <div class="tile is-ancestor">
+                        <div class="tile is-parent is-8">
+                            <article class="tile is-child notification bgrd-is-red">
+                              <p class="title">Middle tile</p>
+                              <p class="subtitle">With an image</p>
+                              <figure class="image is-4by3">
+                                <img src="https://bulma.io/images/placeholders/640x480.png">
+                              </figure>
+                            </article>
+                          </div>
+                        <div class="tile is-vertical is-4">
+                            <div class="tile">
+                                <div class="tile is-parent is-vertical">
+                                <article class="tile is-child notification bgrd-is-mustard">
+                                    <p class="title">Vertical...</p>
+                                    <p class="subtitle">Top tile</p>
+                                </article>
+                                <article class="tile is-child notification bgrd-is-mustard">
+                                    <p class="title">...tiles</p>
+                                    <p class="subtitle">Bottom tile</p>
+                                </article>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+        </div> 
+    </section>
     
     <footer class="footer">
         <div class="content has-text-centered"> 
@@ -99,5 +129,6 @@
 
     <!--Custom js-->
     <script src="assets/scripts/script.js"></script>
+    <script src="assets/scripts/animations.js"></script>
 </body>
 </html>
