@@ -65,7 +65,7 @@ function runAjax() {
 }
 
 function quotesAjax(){
-  var queryURL = "http://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
+  var queryURL = "https://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
   $.ajax({
   url: queryURL,
   method: "GET"
