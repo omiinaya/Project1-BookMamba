@@ -38,45 +38,14 @@ function runAjax() {
   //Keyla's code starts here//
   //
   //displaying book details
-  var a = [Math.floor(Math.random()*responseTest.items.length)]
-  if (responseTest.items[a].volumeInfo.averageRating==5){
-    $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
-    $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
-    $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
-    $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
-    $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
-    $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
-  }
-  else if (responseTest.items[a].volumeInfo.averageRating>=4){
-    $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
-    $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
-    $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
-    $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
-    $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
-    $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
-    }
+  passData()
   });
 }
 //creating function for next button to display next book using Omar's random variable (a)
 function nextBook() {
-  var a = [Math.floor(Math.random()*responseTest.items.length)]
-  if (responseTest.items[a].volumeInfo.averageRating==5){
-    $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
-    $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
-    $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
-    $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
-    $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
-    $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
-  }
-  else if (responseTest.items[a].volumeInfo.averageRating>=4){
-    $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
-    $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
-    $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
-    $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
-    $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
-    $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
-  }
+  passData()
 }
+
 function defaultDracula() {
 var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
 $.ajax({
@@ -85,31 +54,16 @@ method: "GET"
 }).then(function(response) {
 console.log(response)
 responseTest = response;
-var a = [Math.floor(Math.random()*responseTest.items.length)]
-if (response.items[a].volumeInfo.averageRating==5) {
-  $("#bookTitle").html(response.items[a].volumeInfo.title);
-  $("#authorSpan").text(response.items[a].volumeInfo.authors);
-  $("#publishedDate").text(response.items[a].volumeInfo.publishedDate);
-  $("#rating").text(response.items[a].volumeInfo.averageRating);
-  $("#bookCover").attr("src",response.items[a].volumeInfo.imageLinks.thumbnail);
-  $("#descriptionText").text(response.items[a].volumeInfo.description);
-  console.log(response.items[a].volumeInfo.averageRating);
+passData()    
+});
 }
-else if (response.items[a].volumeInfo.averageRating>=4) {
-  $("#bookTitle").html(response.items[a].volumeInfo.title);
-  $("#authorSpan").text(response.items[a].volumeInfo.authors);
-  $("#publishedDate").text(response.items[a].volumeInfo.publishedDate);
-  $("#rating").text(response.items[a].volumeInfo.averageRating);
-  $("#bookCover").attr("src",response.items[a].volumeInfo.imageLinks.thumbnail);
-  $("#descriptionText").text(response.items[a].volumeInfo.description);
-  }     
-  });
-}
+
 function loadPage() {
   defaultDracula()
   quotesAjax()
   enterKey()
 }
+
 //triggering enter key on search-bar button
 function enterKey(){
 var enterText = document.getElementById("search-bar");
@@ -124,4 +78,24 @@ enterText.addEventListener("keyup", function(event)
 }
 //Keyla's code ends here//
 
+function passData() {
+  var a = [Math.floor(Math.random()*responseTest.items.length)]
+  if (responseTest.items[a].volumeInfo.averageRating==5) {
+    $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
+    $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
+    $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
+    $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
+    $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
+    $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
+    console.log(responseTest.items[a].volumeInfo.averageRating);
+  }
+  else if (responseTest.items[a].volumeInfo.averageRating>=4) {
+    $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
+    $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
+    $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
+    $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
+    $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
+    $("#descriptionText").text(responseTest.items[a].volumeInfo.description);
+  }     
+}
     
