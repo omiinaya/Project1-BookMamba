@@ -1,4 +1,3 @@
-//Omar's code starts here//
 var responseTest = "";
 var userInput = "";
 var queryURL = "http://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
@@ -9,19 +8,11 @@ function quotesAjax(){
   method: "GET"
   }).then(function(response) { 
   console.log(response);
-  //Omar's code ends here
-  //
-  //Keyla's code starts here
-  //
-  //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
   $("#quote-author").text("-"+response.contents.author);
   $("#quote-text").text('"'+response.contents.quote+'"');
   });
 }
-//Keyla's code ends here//
-//       
-//Omar's code starts here//
-//
+
 //declaring default value of testURL to be our URL based on titles.
 function runAjax() {
   userInput = $("#search-bar").val();
@@ -33,15 +24,10 @@ function runAjax() {
   console.log(response)
   //assigning global variable responseTest the value of repsonse so we can use response outside of this function.
   responseTest = response;
-  //Omar's code ends here//
-  //
-  //Keyla's code starts here//
-  //
-  //displaying book details
   passData()
   });
 }
-//creating function for next button to display next book using Omar's random variable (a)
+
 function nextBook() {
   passData()
 }
