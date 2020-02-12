@@ -72,6 +72,8 @@ function quotesAjax(){
     $("#quote-spinner").hide();
     $("#quote-author").text("-"+response.contents.author);
     $("#quote-text").text('"'+response.contents.quote+'"');
+    $("#book-section").show();
+    $("#nyTimes").show();
   });
 }
 //k
