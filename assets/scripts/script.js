@@ -7,6 +7,7 @@ var random = 0;
 //k
 function loadPage() {
   defaultDracula()
+  topSellersAjax()
   quotesAjax()
   enterKey()
 }
@@ -50,12 +51,11 @@ while (random === lastrandom) {
 function runAjax() {
   newArr = [];
   userInput = $("#search-bar").val();
-  var testURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
+  var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
   $.ajax({
-  url: testURL,
-  method: "GET"
+    url: queryURL,
+    method: "GET"
   }).then(function(response) {
-    console.log(response)
     //assigning global variable responseTest the value of repsonse so we can use response outside of this function.
     responseTest = response;
     ratingFilter()
@@ -66,10 +66,9 @@ function runAjax() {
 function quotesAjax(){
   var queryURL = "https://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
   $.ajax({
-  url: queryURL,
-  method: "GET"
+    url: queryURL,
+    method: "GET"
   }).then(function(response) { 
-    console.log(response);
     $("#quote-spinner").hide();
     $("#quote-author").text("-"+response.contents.author);
     $("#quote-text").text('"'+response.contents.quote+'"');
@@ -77,14 +76,24 @@ function quotesAjax(){
 }
 //k
 function defaultDracula() {
-  var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
+  var queryURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
   $.ajax({
-  url: testURL,
-  method: "GET"
+    url: queryURL,
+    method: "GET"
   }).then(function(response) {
     console.log(response)
     responseTest = response;
     ratingFilter()
     nextBook()    
+  });
+}
+//o
+function topSellersAjax() {
+  var queryURL = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=6ad84e249d054efeaefe1abb8f89df5b"
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response)
   });
 }
