@@ -38,7 +38,12 @@ function nextBook() {
   $("#publishedDate").text(newArr[random].volumeInfo.publishedDate);
   $("#rating").text(newArr[random].volumeInfo.averageRating);
   $("#descriptionText").text(newArr[random].volumeInfo.description);
-  $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
+  console.log(typeof newArr[random].volumeInfo.imageLinks);
+  if (typeof newArr[random].volumeInfo.imageLinks == "undefined") {
+    $("#bookCover").attr("src","assets/images/128x176_placeholder.png");
+  } else {
+    $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
+  }
 }
 //o
 function noRepeats() {
