@@ -101,6 +101,13 @@ function topSellersAjax() {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response)
+    console.log('top sellers response full:',response)
+//k
+    $("#rank-one-title").html(response.results.books[0].title);
+    $("#rank-one-author").text(response.results.books[0].author);
+    $("#bestSellerCover").attr("src","https://s1.nyt.com/du/books/images/9781250209764.jpg");
+    $("#bestSellerLink").attr("href", response.results.books[0].amazon_product_url);
   });
 }
+
+
