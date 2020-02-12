@@ -50,6 +50,9 @@
             <div class="columns is-vcentered">
                 <div class="column serif is-offset-2 is-mustard is-size-5 has-text-centered">
                     <p><span id="quote-text"></span></p>
+                        <div class="fa-2x" id="quote-spinner">
+                            <i class="fas fa-spinner fa-pulse"></i>
+                        </div>
                     <p><span id="quote-author"></span></p>
                 </div>
             </div>
@@ -62,9 +65,9 @@
               <!--book info from API goes here-->
                 <div class="book-info column is-10">
                     <figure class="image is-pulled-left">
-                        <img id="bookCover" alt="Book Cover" src="assets/images/480x640_placeholder.png" width="128" height="192">
+                        <img id="bookCover" width="128" height="192">
                     </figure>
-                    <h1 class="title is-3 has-text-left serif is-red" id="bookTitle">Dracula</h1>
+                    <h1 class="title is-3 has-text-left serif is-red" id="bookTitle"></h1>
                     <h2 class="subtitle is-6 has-text-left has-text-black-bis"><span class="has-text-weight-bold">Author: </span><span id="authorSpan"></span><span class="has-text-weight-bold"> | Published: </span><span id="publishedDate"></span><span class="has-text-weight-bold"> | Rating: </span><span id="rating"></span></h2>
                     <p class= "has-text-left has-text-grey-darker" id="descriptionText"></p>
                     <div class="buttons is-left">

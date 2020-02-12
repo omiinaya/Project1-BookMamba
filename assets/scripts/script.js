@@ -46,7 +46,6 @@ while (random === lastrandom) {
   }
   lastrandom = random;
 }
-
 //o
 function runAjax() {
   newArr = [];
@@ -56,11 +55,11 @@ function runAjax() {
   url: testURL,
   method: "GET"
   }).then(function(response) {
-  console.log(response)
-  //assigning global variable responseTest the value of repsonse so we can use response outside of this function.
-  responseTest = response;
-  ratingFilter()
-  nextBook()
+    console.log(response)
+    //assigning global variable responseTest the value of repsonse so we can use response outside of this function.
+    responseTest = response;
+    ratingFilter()
+    nextBook()
   });
 }
 //o
@@ -70,9 +69,10 @@ function quotesAjax(){
   url: queryURL,
   method: "GET"
   }).then(function(response) { 
-  console.log(response);
-  $("#quote-author").text("-"+response.contents.author);
-  $("#quote-text").text('"'+response.contents.quote+'"');
+    console.log(response);
+    $("#quote-spinner").hide();
+    $("#quote-author").text("-"+response.contents.author);
+    $("#quote-text").text('"'+response.contents.quote+'"');
   });
 }
 //k
@@ -82,9 +82,9 @@ function defaultDracula() {
   url: testURL,
   method: "GET"
   }).then(function(response) {
-  console.log(response)
-  responseTest = response;
-  ratingFilter()
-  nextBook()    
+    console.log(response)
+    responseTest = response;
+    ratingFilter()
+    nextBook()    
   });
 }
