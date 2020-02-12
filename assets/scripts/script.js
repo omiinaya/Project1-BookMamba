@@ -1,104 +1,106 @@
-
-
-
-//omars code starts here
-         
 var responseTest = "";
-//declaring a global variable of userInput that we can change and use from anywhere in the script.
 var userInput = "";
+var newArr = [];
 
-
-//Keyla's code starts here//
-
-         //works perfectly for random authors
-         var queryURL = "http://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
-         //we bought a key, but aren't using it-----> api_key=c9kZNAbwJv_8tdUeQinJMQeF
-         function quotesAjax(){
-         $.ajax({
-           url: queryURL,
-           method: "GET"
-         }).then(function(response) {
-         
-         console.log(response);
-         //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
-         $("#quote-author").text(response.contents.author);
-         $("#quote-text").text(response.contents.quote);
-         });
-        }
-//Keyla's code ends here//
-         
-         
-         
-         //declaring default value of testURL to be our URL based on titles.
-         function runAjax() {
-             userInput = $("#search-bar").val();
-             var testURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
-             $.ajax({
-             url: testURL,
-             method: "GET"
-             }).then(function(response) {
-             console.log(response)
-             responseTest = response;
-             //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
-             console.log(response);
-             $("#bookTitle").html(response.items[0].volumeInfo.title);
-             $("#authorSpan").text(response.items[0].volumeInfo.authors);
-             $("#publishedDate").text(response.items[0].volumeInfo.publishedDate);
-             $("#rating").text(response.items[0].volumeInfo.averageRating);
-
-             //getting book cover image
-             $("#bookCover").attr("src",response.items[0].volumeInfo.imageLinks.thumbnail);
-
-             });
-            }
-
-            //creating function for next button to display next book using Omar's random variable (a)
-        function nextBook() {
-             console.log(responseTest);
-             var a = [Math.floor(Math.random()*responseTest.items.length)]
-             $("#bookTitle").html(responseTest.items[a].volumeInfo.title);
-             $("#authorSpan").text(responseTest.items[a].volumeInfo.authors);
-             $("#publishedDate").text(responseTest.items[a].volumeInfo.publishedDate);
-             $("#rating").text(responseTest.items[a].volumeInfo.averageRating);
-
-             //getting book cover image
-             $("#bookCover").attr("src",responseTest.items[a].volumeInfo.imageLinks.thumbnail);
-
-         }
-
-
-         function defaultDracula()
-          {
-          var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
-          $.ajax({
-          url: testURL,
-          method: "GET"
-          }).then(function(response) {
-          console.log(response)
-          responseTest = response;
-          //Putting the quotes inside the <p> tags/replacing the placeholder with actual content that entices users to read.
-          console.log(response);
-          $("#bookTitle").html(response.items[1].volumeInfo.title);
-          $("#authorSpan").text(response.items[1].volumeInfo.authors);
-          $("#publishedDate").text(response.items[1].volumeInfo.publishedDate);
-          $("#rating").text(response.items[1].volumeInfo.averageRating);
-
-          //getting book cover image
-          $("#bookCover").attr("src",response.items[1].volumeInfo.imageLinks.thumbnail);
-
-         //getting description to show bellow details section
-         var a = [Math.floor(Math.random()*responseTest.items.length)]
-          $("#descriptionText").text(response.items[a].volumeInfo.description);
-
-
-          });
-         }
-
-         function loadPage()
-         {
-          defaultDracula()
-          quotesAjax()
-         }
-//keyla's code starts here
-
-    
+var lastrandom = 0;
+var random = 0;
+//k
+function loadPage() {
+  defaultDracula()
+  topSellersAjax()
+  quotesAjax()
+  enterKey()
+}
+//k
+function enterKey(){
+  var enterText = document.getElementById("search-bar");
+  enterText.addEventListener("keyup", function(event) {
+    if (event.keyCode===13) {
+      event.preventDefault();
+      runAjax();
+    }
+  });
+}
+//o
+function ratingFilter() {
+  for (var i = 0; i < responseTest.items.length; i++)
+  if (responseTest.items[i].volumeInfo.averageRating >= 4) {
+    newArr.push(responseTest.items[i]);
+  }
+  console.log(newArr);
+}
+//k
+function nextBook() {
+  noRepeats()
+  console.log("index/random value: "+random)
+  $("#bookTitle").html(newArr[random].volumeInfo.title);
+  $("#authorSpan").text(newArr[random].volumeInfo.authors);
+  $("#publishedDate").text(newArr[random].volumeInfo.publishedDate);
+  $("#rating").text(newArr[random].volumeInfo.averageRating);
+  $("#descriptionText").text(newArr[random].volumeInfo.description);
+  console.log(typeof newArr[random].volumeInfo.imageLinks);
+  if (typeof newArr[random].volumeInfo.imageLinks == "undefined") {
+    $("#bookCover").attr("src","assets/images/128x176_placeholder.png");
+  } else {
+    $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
+  }
+}
+//o
+function noRepeats() {
+while (random === lastrandom) {
+  random = Math.floor(Math.random() * newArr.length);
+  }
+  lastrandom = random;
+}
+//o
+function runAjax() {
+  newArr = [];
+  userInput = $("#search-bar").val();
+  var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    //assigning global variable responseTest the value of repsonse so we can use response outside of this function.
+    responseTest = response;
+    ratingFilter()
+    nextBook()
+  });
+}
+//o
+function quotesAjax(){
+  var queryURL = "https://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) { 
+    $("#quote-spinner").hide();
+    $("#quote-author").text("-"+response.contents.author);
+    $("#quote-text").text('"'+response.contents.quote+'"');
+    $("#book-section").show();
+    $("#nyTimes").show();
+  });
+}
+//k
+function defaultDracula() {
+  var queryURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response)
+    responseTest = response;
+    ratingFilter()
+    nextBook()    
+  });
+}
+//o
+function topSellersAjax() {
+  var queryURL = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=6ad84e249d054efeaefe1abb8f89df5b"
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response)
+  });
+}
