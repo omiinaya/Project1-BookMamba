@@ -4,13 +4,13 @@ var newArr = [];
 
 var lastrandom = 0;
 var random = 0;
-
+//k
 function loadPage() {
   defaultDracula()
   quotesAjax()
   enterKey()
 }
-
+//k
 function enterKey(){
   var enterText = document.getElementById("search-bar");
   enterText.addEventListener("keyup", function(event) {
@@ -20,7 +20,7 @@ function enterKey(){
     }
   });
 }
-
+//o
 function ratingFilter() {
   for (var i = 0; i < responseTest.items.length; i++)
   if (responseTest.items[i].volumeInfo.averageRating >= 4) {
@@ -28,7 +28,7 @@ function ratingFilter() {
   }
   console.log(newArr);
 }
-
+//k
 function nextBook() {
   noRepeats()
   console.log("index/random value: "+random)
@@ -39,7 +39,7 @@ function nextBook() {
   $("#descriptionText").text(newArr[random].volumeInfo.description);
   $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
 }
-
+//o
 function noRepeats() {
 while (random === lastrandom) {
   random = Math.floor(Math.random() * newArr.length);
@@ -47,7 +47,7 @@ while (random === lastrandom) {
   lastrandom = random;
 }
 
-//declaring default value of testURL to be our URL based on titles.
+//o
 function runAjax() {
   newArr = [];
   userInput = $("#search-bar").val();
@@ -63,7 +63,7 @@ function runAjax() {
   nextBook()
   });
 }
-
+//o
 function quotesAjax(){
   var queryURL = "https://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
   $.ajax({
@@ -75,7 +75,7 @@ function quotesAjax(){
   $("#quote-text").text('"'+response.contents.quote+'"');
   });
 }
-
+//k
 function defaultDracula() {
   var testURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
   $.ajax({
