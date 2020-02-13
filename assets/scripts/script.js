@@ -1,7 +1,7 @@
 var userInput = "";
-var newArr = [];
 var authorName="";
 var titleName="";
+var filteredBooks = [];
 
 var bookResponse = "";
 var nyResponse = "";
@@ -33,9 +33,9 @@ function enterKey(){
 function ratingFilter() {
   for (var i = 0; i < bookResponse.items.length; i++)
   if (bookResponse.items[i].volumeInfo.averageRating >= 4) {
-    newArr.push(bookResponse.items[i]);
+    filteredBooks.push(bookResponse.items[i]);
+    console.log(filteredBooks);
   }
-  console.log(newArr);
 }
 text_truncate = function(str, length, ending) {
   if (length == null) {
@@ -53,19 +53,18 @@ text_truncate = function(str, length, ending) {
 //k
 function bookData() { //used to be called nextBook. renamed for readability.
   noRepeats()
-  console.log("index/random value: "+random)
-  authorName = newArr[random].volumeInfo.authors;
-  titleName = newArr[random].volumeInfo.title;
-  $("#bookTitle").html(newArr[random].volumeInfo.title);
-  $("#authorSpan").text(newArr[random].volumeInfo.authors);
-  $("#publishedDate").text(newArr[random].volumeInfo.publishedDate);
-  $("#rating").text(newArr[random].volumeInfo.averageRating);
+  authorName = filteredBooks[random].volumeInfo.authors;
+  titleName = filteredBooks[random].volumeInfo.title;
+  $("#bookTitle").html(filteredBooks[random].volumeInfo.title);
+  $("#authorSpan").text(filteredBooks[random].volumeInfo.authors);
+  $("#publishedDate").text(filteredBooks[random].volumeInfo.publishedDate);
+  $("#rating").text(filteredBooks[random].volumeInfo.averageRating);
   shortenDescription()
 
-  if (typeof newArr[random].volumeInfo.imageLinks == "undefined") { //in case the JSON does not return a thumbnail to display.
+  if (typeof filteredBooks[random].volumeInfo.imageLinks == "undefined") { //in case the JSON does not return a thumbnail to display.
     $("#bookCover").attr("src","assets/images/128x176_placeholder.png"); //shows placeholder if no thumbnail.
   } else {
-    $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail); 
+    $("#bookCover").attr("src",filteredBooks[random].volumeInfo.imageLinks.thumbnail); 
   }
 }
 //o
@@ -80,12 +79,12 @@ function shortenQuote() {
 }
 
 function shortenDescription() {
-  truncatedDescription = text_truncate('"'+newArr[random].volumeInfo.description, 200);
-  fullDescription = '"'+newArr[random].volumeInfo.description+'"';
-  var testDescription = newArr[random].volumeInfo.description;
+  truncatedDescription = text_truncate('"'+filteredBooks[random].volumeInfo.description, 200);
+  fullDescription = '"'+filteredBooks[random].volumeInfo.description+'"';
+  var testDescription = filteredBooks[random].volumeInfo.description;
   if (typeof testDescription != "undefined") {
     if (testDescription.length > 200) {
-    fullDescription = '"'+newArr[random].volumeInfo.description+'"';
+    fullDescription = '"'+filteredBooks[random].volumeInfo.description+'"';
     $("#descriptionText").text(truncatedDescription)
     } else {
       $("#descriptionText").text(fullDescription)
@@ -117,13 +116,13 @@ function expandDescription() {
 
 function noRepeats() { //makes sure there are no repeated random numbers. (the same title wont show up again when pressing next.)
 while (random === lastrandom) {
-  random = Math.floor(Math.random() * newArr.length);
+  random = Math.floor(Math.random() * filteredBooks.length);
   }
   lastrandom = random;
 }
 
 function searchAjax() { //used to be called runAjax. renamed for readability.
-  newArr = [];
+  filteredBooks = [];
   userInput = $("#search-bar").val();
   var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
   $.ajax({
@@ -134,10 +133,8 @@ function searchAjax() { //used to be called runAjax. renamed for readability.
     bookResponse = response;
     console.log(bookResponse);
     ratingFilter()
-    $("#book-section").show();
     bookData()
-    console.log(authorName);
-
+    $("#book-section").show();
   });
 }
 
