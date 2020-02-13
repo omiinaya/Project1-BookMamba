@@ -1,1 +1,1 @@
-console.log("hello animate");
+//console.log("hello animate");

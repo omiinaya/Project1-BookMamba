@@ -1,5 +1,6 @@
 var bookResponse = "";
 var nyResponse = "";
+var quoteResponse = "";
 var userInput = "";
 var newArr = [];
 var authorName="";
@@ -13,7 +14,6 @@ function loadPage() {
   quotesAjax()
   enterKey()
   buyNow()
-  otherButtons()
 }
 
 function enterKey(){
@@ -33,8 +33,21 @@ function ratingFilter() {
   }
   console.log(newArr);
 }
+text_truncate = function(str, length, ending) {
+  if (length == null) {
+    length = 100;
+  }
+  if (ending == null) {
+    ending = '...';
+  }
+  if (str.length > length) {
+    return str.substring(0, length - ending.length) + ending;
+  } else {
+    return str;
+  }
+};
 //k
-function nextBook() {
+function bookData() {
   noRepeats()
   console.log("index/random value: "+random)
   authorName = newArr[random].volumeInfo.authors;
@@ -43,12 +56,30 @@ function nextBook() {
   $("#authorSpan").text(newArr[random].volumeInfo.authors);
   $("#publishedDate").text(newArr[random].volumeInfo.publishedDate);
   $("#rating").text(newArr[random].volumeInfo.averageRating);
-  $("#descriptionText").text(newArr[random].volumeInfo.description);
+  shortenDescription()
+
   console.log(typeof newArr[random].volumeInfo.imageLinks);
   if (typeof newArr[random].volumeInfo.imageLinks == "undefined") {
     $("#bookCover").attr("src","assets/images/128x176_placeholder.png");
   } else {
     $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
+  }
+}
+//o
+function shortenDescription() {
+  var truncatedDescription = text_truncate(newArr[random].volumeInfo.description, 200);
+  if (newArr[random].volumeInfo.description.length > 200) {
+    $("#descriptionText").text('"'+truncatedDescription+'" Read More');
+  } else {
+    $("#descriptionText").text('"'+response.contents.description+'"');
+  }
+}
+function shortenQuote() {
+  var truncatedQuote = text_truncate(quoteResponse.contents.quote, 125);
+  if (quoteResponse.contents.quote.length > 125) {
+    $("#quote-text").text('"'+truncatedQuote+'" Read More');
+  } else {
+    $("#quote-text").text('"'+quoteResponse.contents.quote+'"');
   }
 }
 //o
@@ -71,7 +102,7 @@ function runAjax() {
     bookResponse = response;
     ratingFilter()
     $("#book-section").show();
-    nextBook()
+    bookData()
     console.log(authorName);
 
   });
@@ -83,9 +114,10 @@ function quotesAjax(){
     url: queryURL,
     method: "GET"
   }).then(function(response) { 
+    quoteResponse = response;
+    shortenQuote()
     $("#quote-spinner").hide();
     $("#quote-author").text("-"+response.contents.author);
-    $("#quote-text").text('"'+response.contents.quote+'"');
     $("#nyTimes").show();
   });
 }
