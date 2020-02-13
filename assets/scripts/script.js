@@ -101,6 +101,35 @@ function topSellersAjax() {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response)
+    console.log('top sellers response full:',response)
+//k
+    $("#rank-one-title").html(response.results.books[0].title);
+    $("#rank-one-author").text(response.results.books[0].author);
+    $("#bestSellerCover").attr("src",response.results.books[0].book_image);
+    if (response.results.books[0].book_review_link == "") {
+      $("#bestSellerLink").attr("href",response.results.books[0].amazon_product_url);
+    } else {
+      $("#bestSellerLink").attr("href",response.results.books[0].book_review_link);
+    }
+
+   $("#rank-two-title").html(response.results.books[1].title);
+   $("#rank-two-author").text(response.results.books[1].author);
+   if (response.results.books[1].book_review_link == "") {
+    $("#bestSellerLink2").attr("href",response.results.books[1].amazon_product_url);
+  } else {
+    $("#bestSellerLink2").attr("href",response.results.books[1].book_review_link);
+  }
+    
+  $("#rank-three-title").html(response.results.books[2].title);
+   $("#rank-three-author").text(response.results.books[2].author);
+   if (response.results.books[2].book_review_link == "") {
+    $("#bestSellerLink3").attr("href",response.results.books[2].amazon_product_url);
+  } else {
+    $("#bestSellerLink3").attr("href",response.results.books[2].book_review_link);
+  }
   });
 }
+
+//comment
+
+
