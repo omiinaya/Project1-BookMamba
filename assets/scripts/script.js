@@ -1,19 +1,25 @@
-var bookResponse = "";
-var nyResponse = "";
-var quoteResponse = "";
 var userInput = "";
 var newArr = [];
 var authorName="";
 var titleName="";
 
+var bookResponse = "";
+var nyResponse = "";
+var quoteResponse = "";
+
 var lastrandom = 0;
 var random = 0;
+
+var truncatedQuote = "";
+var truncatedDescription = "";
 //k
 function loadPage() {
   topSellersAjax()
   quotesAjax()
   enterKey()
   buyNow()
+  ExpandQuote()
+  ExpandDescription()
 }
 
 function enterKey(){
@@ -38,7 +44,7 @@ text_truncate = function(str, length, ending) {
     length = 100;
   }
   if (ending == null) {
-    ending = '...';
+    ending = '..." Read More';
   }
   if (str.length > length) {
     return str.substring(0, length - ending.length) + ending;
@@ -59,30 +65,33 @@ function bookData() {
   shortenDescription()
 
   console.log(typeof newArr[random].volumeInfo.imageLinks);
-  if (typeof newArr[random].volumeInfo.imageLinks == "undefined") {
-    $("#bookCover").attr("src","assets/images/128x176_placeholder.png");
+  if (typeof newArr[random].volumeInfo.imageLinks == "undefined") { //in case the JSON does not return a thumbnail to display.
+    $("#bookCover").attr("src","assets/images/128x176_placeholder.png"); //shows placeholder if no thumbnail.
   } else {
-    $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail);
+    $("#bookCover").attr("src",newArr[random].volumeInfo.imageLinks.thumbnail); 
   }
 }
 //o
 function shortenDescription() {
-  var truncatedDescription = text_truncate(newArr[random].volumeInfo.description, 200);
+  truncatedDescription = text_truncate('"'+newArr[random].volumeInfo.description, 200);
+  fullDescription = '"'+newArr[random].volumeInfo.description+'"';
   if (newArr[random].volumeInfo.description.length > 200) {
-    $("#descriptionText").text('"'+truncatedDescription+'" Read More');
+    $("#descriptionText").text(truncatedDescription);
   } else {
-    $("#descriptionText").text('"'+response.contents.description+'"');
+    $("#descriptionText").text('"'+newArr[random].volumeInfo.description+'"');
   }
 }
+
 function shortenQuote() {
-  var truncatedQuote = text_truncate(quoteResponse.contents.quote, 125);
+  truncatedQuote = text_truncate('"'+quoteResponse.contents.quote, 125);
+  fullQuote = '"'+quoteResponse.contents.quote+'"';
   if (quoteResponse.contents.quote.length > 125) {
-    $("#quote-text").text('"'+truncatedQuote+'" Read More');
+    $("#quote-text").text(truncatedQuote);
   } else {
     $("#quote-text").text('"'+quoteResponse.contents.quote+'"');
   }
 }
-//o
+
 function noRepeats() {
 while (random === lastrandom) {
   random = Math.floor(Math.random() * newArr.length);
@@ -107,7 +116,7 @@ function runAjax() {
 
   });
 }
-//o
+
 function quotesAjax(){
   var queryURL = "https://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
   $.ajax({
@@ -157,8 +166,28 @@ function topSellersAjax() {
   });
 }
 //giving buy now button functionality
-function buyNow(){
+function buyNow() {
   $("#buyNowBtn").click(function() {
   window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+authorName);
+  });
+}
+
+function ExpandQuote() {
+  $("#quote-text").click(function() {
+    if ($("#quote-text").text() == truncatedQuote) {
+      $("#quote-text").text(fullQuote)
+    } else {
+      $("#quote-text").text(truncatedQuote)
+    }
+  });
+}
+
+function ExpandDescription() {
+  $("#descriptionText").click(function() {
+    if ($("#descriptionText").text() == truncatedDescription) {
+      $("#descriptionText").text(fullDescription)
+    } else {
+      $("#descriptionText").text(truncatedDescription)
+    }
   });
 }
