@@ -1,17 +1,19 @@
 var responseTest = "";
 var userInput = "";
 var newArr = [];
+var authorName="";
+var titleName="";
 
 var lastrandom = 0;
 var random = 0;
 //k
 function loadPage() {
-  defaultDracula()
   topSellersAjax()
   quotesAjax()
   enterKey()
+  buyNow()
 }
-//k
+
 function enterKey(){
   var enterText = document.getElementById("search-bar");
   enterText.addEventListener("keyup", function(event) {
@@ -33,6 +35,8 @@ function ratingFilter() {
 function nextBook() {
   noRepeats()
   console.log("index/random value: "+random)
+  authorName = newArr[random].volumeInfo.authors;
+  titleName = newArr[random].volumeInfo.title;
   $("#bookTitle").html(newArr[random].volumeInfo.title);
   $("#authorSpan").text(newArr[random].volumeInfo.authors);
   $("#publishedDate").text(newArr[random].volumeInfo.publishedDate);
@@ -52,7 +56,7 @@ while (random === lastrandom) {
   }
   lastrandom = random;
 }
-//o
+
 function runAjax() {
   newArr = [];
   userInput = $("#search-bar").val();
@@ -64,7 +68,10 @@ function runAjax() {
     //assigning global variable responseTest the value of repsonse so we can use response outside of this function.
     responseTest = response;
     ratingFilter()
+    $("#book-section").show();
     nextBook()
+    console.log(authorName);
+
   });
 }
 //o
@@ -77,24 +84,10 @@ function quotesAjax(){
     $("#quote-spinner").hide();
     $("#quote-author").text("-"+response.contents.author);
     $("#quote-text").text('"'+response.contents.quote+'"');
-    $("#book-section").show();
     $("#nyTimes").show();
   });
 }
-//k
-function defaultDracula() {
-  var queryURL = "https://www.googleapis.com/books/v1/volumes?q=Dracula";
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    console.log(response)
-    responseTest = response;
-    ratingFilter()
-    nextBook()    
-  });
-}
-//o
+
 function topSellersAjax() {
   var queryURL = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=6ad84e249d054efeaefe1abb8f89df5b"
   $.ajax({
@@ -129,7 +122,9 @@ function topSellersAjax() {
   }
   });
 }
-
-//comment
-
-
+//giving buy now button functionality
+function buyNow(){
+   document.getElementById("buyNowBtn").addEventListener("click",function() {
+   window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+authorName);
+  });
+}
