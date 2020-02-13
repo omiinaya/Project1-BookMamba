@@ -105,8 +105,17 @@ function topSellersAjax() {
 //k
     $("#rank-one-title").html(response.results.books[0].title);
     $("#rank-one-author").text(response.results.books[0].author);
-    $("#bestSellerCover").attr("src","https://s1.nyt.com/du/books/images/9781250209764.jpg");
-    $("#bestSellerLink").attr("href", response.results.books[0].amazon_product_url);
+    $("#bestSellerCover").attr("src",response.results.books[0].book_image);
+    if (response.results.books[0].book_review_link == "") {
+      $("#bestSellerLink").attr("href",response.results.books[0].amazon_product_url);
+    } else {
+      $("#bestSellerLink").attr("href",response.results.books[0].book_review_link);
+    }
+
+
+    
+
+    
   });
 }
 
