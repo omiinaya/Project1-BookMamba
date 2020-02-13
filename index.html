@@ -17,7 +17,7 @@
 
     <!--Custom css-->
     <link rel="stylesheet" href="assets/css/styles.css">
-    <!--<link rel="stylesheet" href="assets/css/debug.css">-->
+    <!-- <link rel="stylesheet" href="assets/css/debug.css"> -->
 
 </head>
 <body onload=loadPage()>
@@ -67,18 +67,14 @@
                     <figure class="image is-pulled-left">
                         <img id="bookCover" width="128" height="192">
                     </figure>
-                    <h1 class="title is-3 has-text-left serif is-red" id="bookTitle"></h1>
+                    <h1 class="title is-2 has-text-left serif is-red" id="bookTitle"></h1>
                     <h2 class="subtitle is-6 has-text-left has-text-black-bis"><span class="has-text-weight-bold">Author: </span><span id="authorSpan"></span><span class="has-text-weight-bold"> | Published: </span><span id="publishedDate"></span><span class="has-text-weight-bold"> | Rating: </span><span id="rating"></span></h2>
                     <p class= "has-text-left has-text-grey-darker" id="descriptionText"></p>
                     <div class="buttons is-left">
-
                         <button class="buy-button button is-rounded bgrd-is-red has-text-white-bis is-small is-uppercase has-text-weight-bold">Buy Now</button>
                         <a class="buy-button social-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fomiinaya.github.io%2FProject1%2F&quote=Go%20to%20this%20site%20to%20check%20our%20new%20books!" title="Share on Facebook"  target="_blank"><img alt="Share on Facebook" src="images/flat_web_icon_set/color/Facebook.png" /></a>
                         <a class="buy-button social-button" href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fomiinaya.github.io%2FProject1%2F&text=Go%20to%20this%20site%20to%20check%20our%20new%20books!:%20https%3A%2F%2Fomiinaya.github.io%2FProject1%2F" target="_blank" title="Tweet"><img alt="Tweet" src="images/flat_web_icon_set/color/Twitter.png" /></a>
                         <a class="buy-button social-button" href="http://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fomiinaya.github.io%2FProject1%2F&title=Go%20to%20this%20site%20to%20check%20our%20new%20books!&summary=&source=https%3A%2F%2Fomiinaya.github.io%2FProject1%2F" target="_blank" title="Share on LinkedIn"><img alt="Share on LinkedIn" src="images/flat_web_icon_set/color/LinkedIn.png" /></a>
-
-                       
-
                     </div>
                 </div>
                 
@@ -100,28 +96,36 @@
                     <h1 class="title has-text-white-bis has-text-centered serif">Check out the top 3 NY Times best sellers for this week!</h1>
                     <div class="tile is-ancestor">
                         <div class="tile is-parent is-8">
-                            <article class="tile is-child notification bgrd-is-red">
-                              <p class="title" id="rank-one-title">Middle tile</p>
-                              <p class="subtitle" id="rank-one-author">With an image</p>
-                              <figure class="image is-4by3">
-                                <a id="bestSellerLink" href="#" target="_blank">
-                                    <img id= "bestSellerCover" src="https://bulma.io/images/placeholders/640x480.png">
-                                </a>
-                            </figure>
+                            <article class="tile is-child notification bgrd-is-red has-text-light">
+                                <div class="ranking1 is-size-3 serif has-text-centered has-text-weight-bold has-text-grey-darker">1</div>
+                              <p class="title serif is-size-3" id="rank-one-title">Middle tile</p>
+                              <p class="subtitle is-uppercase is-size-5" id="rank-one-author">With an image</p>
+
+                              <div class="columns">
+                                <div class="column">
+                                    <img class="is-2by3" src="https://s1.nyt.com/du/books/images/9781250207203.jpg">  
+                                </div>
+                                <div class="column">
+                                    <p class="nytimesDescription">The 50th book of the In Death series. Eve Dallas seeks the sender of packages that give off toxic airborne fumes.</p>  
+                                    <button class="buy-button button is-rounded bgrd-is-mustard has-text-grey-darker is-small is-uppercase has-text-weight-bold" id="nytBook1">Read More</button>
+                                </div>
+                            </div>
                             </article>
                           </div>
                         <div class="tile is-vertical is-4">
                             <div class="tile">
-                                <div class="tile is-parent is-vertical">
+                                <div class="tile is-parent is-vertical">           
                                 <article class="tile is-child notification bgrd-is-mustard">
-                                    <p class="title" id="rank-two-title">Vertical...</p>
-                                    <p class="subtitle" id="rank-two-author">Top tile</p>
-                                    <a id="bestSellerLink2" href="#" target="_blank">View More</a>
+                                    <div class="ranking2 is-size-3 serif has-text-centered has-text-weight-bold">2</div>
+                                    <p class="title is-size-4 serif" id="rank-two-title">There are many variations of passages. </p>
+                                    <p class="subtitle is-size-5 is-uppercase" id="rank-two-author">Top tile</p>
+                                    <button class="buy-button button is-rounded bgrd-is-red has-text-white-bis is-small is-uppercase has-text-weight-bold" id="nytBook2">Read More</button>
                                 </article>
                                 <article class="tile is-child notification bgrd-is-mustard">
-                                    <p class="title" id="rank-three-title">...tiles</p>
-                                    <p class="subtitle" id="rank-three-author">Bottom tile</p>
-                                    <a id="bestSellerLink3" href="#" target="_blank">View More</a>
+                                    <div class="ranking2 is-size-3 serif has-text-centered has-text-weight-bold">3</div>
+                                    <p class="title is-size-4 serif" id="rank-three-title">There are many variations of passages of Lorem Ipsum available. </p>
+                                    <p class="subtitle is-size-5 is-uppercase" id="rank-three-author">Bottom tile</p>
+                                    <button class="buy-button button is-rounded bgrd-is-red has-text-white-bis is-small is-uppercase has-text-weight-bold" id="nytBook3">Read More</button>
                                 </article>
                                 </div>  
                             </div>
