@@ -101,6 +101,22 @@ function topSellersAjax() {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response)
+    console.log('top sellers response full:',response)
+//k
+    $("#rank-one-title").html(response.results.books[0].title);
+    $("#rank-one-author").text(response.results.books[0].author);
+    $("#bestSellerCover").attr("src",response.results.books[0].book_image);
+    if (response.results.books[0].book_review_link == "") {
+      $("#bestSellerLink").attr("href",response.results.books[0].amazon_product_url);
+    } else {
+      $("#bestSellerLink").attr("href",response.results.books[0].book_review_link);
+    }
+
+
+    
+
+    
   });
 }
+
+
