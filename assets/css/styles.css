@@ -52,10 +52,39 @@ body {
     padding-right: 20px;
 }
 
-#book-section {
+#book-section, #nyTimes {
     display: none;
 }
 
-#nyTimes {
-    display: none;
+.tile {
+    position: relative;
+}
+
+.ranking1 {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    z-index: 100;
+    top:-.5rem;
+    right: 1.5rem;
+    background-color: #c1ad1e;
+}
+
+.ranking2 {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    z-index: 100;
+    top:-.5rem;
+    right: 1.5rem;
+    background-color: #BA1A11;
+    color: #fff;  
+}
+
+.notification {
+    padding: 2.5rem 1.25rem 1.25rem 1.25rem;
+}
+
+.padding-left {
+    padding-left: .5rem;
 }
