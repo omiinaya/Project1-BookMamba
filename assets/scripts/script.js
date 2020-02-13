@@ -16,8 +16,8 @@ function loadPage() {
   quotesAjax()
   enterKey()
   buyNow()
-  ExpandQuote()
-  ExpandDescription()
+  expandQuote()
+  expandDescription()
 }
 
 function enterKey(){
@@ -95,7 +95,7 @@ function shortenDescription() {
   }
 }
 
-function ExpandQuote() {
+function expandQuote() {
   $("#quote-text").click(function() {
     if ($("#quote-text").text() == truncatedQuote) { //if it's already trimmed, 
       $("#quote-text").text(fullQuote) //show full quote.
@@ -105,7 +105,7 @@ function ExpandQuote() {
   });
 }
 
-function ExpandDescription() {
+function expandDescription() {
   $("#descriptionText").click(function() {
     if ($("#descriptionText").text() == truncatedDescription) {
       $("#descriptionText").text(fullDescription)
