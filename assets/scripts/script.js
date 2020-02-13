@@ -10,8 +10,6 @@ var quoteResponse = "";
 var lastrandom = 0;
 var random = 0;
 
-var truncatedQuote = "";
-var truncatedDescription = "";
 //k
 function loadPage() {
   topSellersAjax()
@@ -27,7 +25,7 @@ function enterKey(){
   enterText.addEventListener("keyup", function(event) {
     if (event.keyCode===13) {
       event.preventDefault();
-      runAjax();
+      searchAjax();
     }
   });
 }
@@ -53,7 +51,7 @@ text_truncate = function(str, length, ending) {
   }
 };
 //k
-function bookData() {
+function bookData() { //used to be called nextBook. renamed for readability.
   noRepeats()
   console.log("index/random value: "+random)
   authorName = newArr[random].volumeInfo.authors;
@@ -64,7 +62,6 @@ function bookData() {
   $("#rating").text(newArr[random].volumeInfo.averageRating);
   shortenDescription()
 
-  console.log(typeof newArr[random].volumeInfo.imageLinks);
   if (typeof newArr[random].volumeInfo.imageLinks == "undefined") { //in case the JSON does not return a thumbnail to display.
     $("#bookCover").attr("src","assets/images/128x176_placeholder.png"); //shows placeholder if no thumbnail.
   } else {
@@ -72,34 +69,60 @@ function bookData() {
   }
 }
 //o
-function shortenDescription() {
-  truncatedDescription = text_truncate('"'+newArr[random].volumeInfo.description, 200);
-  fullDescription = '"'+newArr[random].volumeInfo.description+'"';
-  if (newArr[random].volumeInfo.description.length > 200) {
-    $("#descriptionText").text(truncatedDescription);
-  } else {
-    $("#descriptionText").text('"'+newArr[random].volumeInfo.description+'"');
-  }
-}
-
 function shortenQuote() {
-  truncatedQuote = text_truncate('"'+quoteResponse.contents.quote, 125);
+  truncatedQuote = text_truncate('"'+quoteResponse.contents.quote+'"', 125); //creates a trimmed version of the quote received from JSON.
   fullQuote = '"'+quoteResponse.contents.quote+'"';
   if (quoteResponse.contents.quote.length > 125) {
     $("#quote-text").text(truncatedQuote);
   } else {
-    $("#quote-text").text('"'+quoteResponse.contents.quote+'"');
+    $("#quote-text").text(fullQuote);
   }
 }
 
-function noRepeats() {
+function shortenDescription() {
+  truncatedDescription = text_truncate('"'+newArr[random].volumeInfo.description, 200);
+  fullDescription = '"'+newArr[random].volumeInfo.description+'"';
+  var testDescription = newArr[random].volumeInfo.description;
+  if (typeof testDescription != "undefined") {
+    if (testDescription.length > 200) {
+    fullDescription = '"'+newArr[random].volumeInfo.description+'"';
+    $("#descriptionText").text(truncatedDescription)
+    } else {
+      $("#descriptionText").text(fullDescription)
+    }
+  } else {
+    $("#descriptionText").text('"A book description was not provided."')
+  }
+}
+
+function ExpandQuote() {
+  $("#quote-text").click(function() {
+    if ($("#quote-text").text() == truncatedQuote) { //if it's already trimmed, 
+      $("#quote-text").text(fullQuote) //show full quote.
+    } else {
+      $("#quote-text").text(truncatedQuote) //otherwise, trim quote.
+    }
+  });
+}
+
+function ExpandDescription() {
+  $("#descriptionText").click(function() {
+    if ($("#descriptionText").text() == truncatedDescription) {
+      $("#descriptionText").text(fullDescription)
+    } else {
+      $("#descriptionText").text(truncatedDescription)
+    }
+  });
+}
+
+function noRepeats() { //makes sure there are no repeated random numbers. (the same title wont show up again when pressing next.)
 while (random === lastrandom) {
   random = Math.floor(Math.random() * newArr.length);
   }
   lastrandom = random;
 }
 
-function runAjax() {
+function searchAjax() { //used to be called runAjax. renamed for readability.
   newArr = [];
   userInput = $("#search-bar").val();
   var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
@@ -109,6 +132,7 @@ function runAjax() {
   }).then(function(response) {
     //assigning global variable bookResponse the value of repsonse so we can use response outside of this function.
     bookResponse = response;
+    console.log(bookResponse);
     ratingFilter()
     $("#book-section").show();
     bookData()
@@ -124,13 +148,14 @@ function quotesAjax(){
     method: "GET"
   }).then(function(response) { 
     quoteResponse = response;
+    console.log(quoteResponse);
     shortenQuote()
     $("#quote-spinner").hide();
     $("#quote-author").text("-"+response.contents.author);
     $("#nyTimes").show();
   });
 }
-
+//k
 function topSellersAjax() {
   var queryURL = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=6ad84e249d054efeaefe1abb8f89df5b"
   $.ajax({
@@ -138,7 +163,7 @@ function topSellersAjax() {
     method: "GET"
   }).then(function(response) {
     nyResponse = response;
-//k
+    console.log(nyResponse);
     $("#rank-one-title").html(response.results.books[0].title);
     $("#rank-one-author").text(response.results.books[0].author);
     $("#bestSellerCover").attr("src",response.results.books[0].book_image);
@@ -169,25 +194,5 @@ function topSellersAjax() {
 function buyNow() {
   $("#buyNowBtn").click(function() {
   window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+authorName);
-  });
-}
-
-function ExpandQuote() {
-  $("#quote-text").click(function() {
-    if ($("#quote-text").text() == truncatedQuote) {
-      $("#quote-text").text(fullQuote)
-    } else {
-      $("#quote-text").text(truncatedQuote)
-    }
-  });
-}
-
-function ExpandDescription() {
-  $("#descriptionText").click(function() {
-    if ($("#descriptionText").text() == truncatedDescription) {
-      $("#descriptionText").text(fullDescription)
-    } else {
-      $("#descriptionText").text(truncatedDescription)
-    }
   });
 }
