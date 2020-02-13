@@ -1,4 +1,5 @@
-var responseTest = "";
+var bookResponse = "";
+var nyResponse = "";
 var userInput = "";
 var newArr = [];
 var authorName="";
@@ -12,6 +13,7 @@ function loadPage() {
   quotesAjax()
   enterKey()
   buyNow()
+  otherButtons()
 }
 
 function enterKey(){
@@ -25,9 +27,9 @@ function enterKey(){
 }
 //o
 function ratingFilter() {
-  for (var i = 0; i < responseTest.items.length; i++)
-  if (responseTest.items[i].volumeInfo.averageRating >= 4) {
-    newArr.push(responseTest.items[i]);
+  for (var i = 0; i < bookResponse.items.length; i++)
+  if (bookResponse.items[i].volumeInfo.averageRating >= 4) {
+    newArr.push(bookResponse.items[i]);
   }
   console.log(newArr);
 }
@@ -65,8 +67,8 @@ function runAjax() {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    //assigning global variable responseTest the value of repsonse so we can use response outside of this function.
-    responseTest = response;
+    //assigning global variable bookResponse the value of repsonse so we can use response outside of this function.
+    bookResponse = response;
     ratingFilter()
     $("#book-section").show();
     nextBook()
@@ -94,7 +96,7 @@ function topSellersAjax() {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log('top sellers response full:',response)
+    nyResponse = response;
 //k
     $("#rank-one-title").html(response.results.books[0].title);
     $("#rank-one-author").text(response.results.books[0].author);
@@ -113,8 +115,8 @@ function topSellersAjax() {
     $("#bestSellerLink2").attr("href",response.results.books[1].book_review_link);
   }
     
-  $("#rank-three-title").html(response.results.books[2].title);
-   $("#rank-three-author").text(response.results.books[2].author);
+    $("#rank-three-title").html(response.results.books[2].title);
+    $("#rank-three-author").text(response.results.books[2].author);
    if (response.results.books[2].book_review_link == "") {
     $("#bestSellerLink3").attr("href",response.results.books[2].amazon_product_url);
   } else {
@@ -124,7 +126,7 @@ function topSellersAjax() {
 }
 //giving buy now button functionality
 function buyNow(){
-   document.getElementById("buyNowBtn").addEventListener("click",function() {
-   window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+authorName);
+  $("#buyNowBtn").click(function() {
+  window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+authorName);
   });
 }
