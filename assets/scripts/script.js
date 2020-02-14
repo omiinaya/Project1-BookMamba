@@ -54,6 +54,7 @@ text_truncate = function(str, length, ending) {
 //k
 function bookData() { //used to be called nextBook. renamed for readability.
   console.log(filteredBooks.length);
+  console.log(filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier);
   if (filteredBooks.length > 1) {
     noRepeats()
   }
@@ -142,18 +143,7 @@ function searchAjax() { //used to be called runAjax. renamed for readability.
     console.log(bookResponse);
     ratingFilter()
     bookData()
-    $("#book-section").show();
-  });
-}
-
-function testAjax() {
-  var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    //assigning global variable bookResponse the value of repsonse so we can use response outside of this function.
-    console.log(response)
+    shareButtons()
     $("#book-section").show();
   });
 }
@@ -210,12 +200,12 @@ function topSellersAjax() {
 //giving buy now button functionality
 function buyNow() {
   $("#buyNowBtn").click(function() {
-  window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+authorName);
+  window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+" "+authorName);
   });
 }
 //experimental
 //
-// Parse the URL parameter
+//parse the URL parameter
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
@@ -233,4 +223,20 @@ $(document).ready(function() {
 if (dynamicContent) {
   userInput = dynamicContent;
   searchAjax()
-} 
+  }
+});
+
+function shareButtons() {
+  var ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
+  var craftedURL = "https://omiinaya.github.io/Project1/index.html?q="+ISBN;
+
+  var twitterURL = "https://twitter.com/intent/tweet?text=Check out this book! "+craftedURL;
+  $("#twitter-button").attr("href", twitterURL)
+
+  var facebookURL = "https://www.facebook.com/sharer/sharer.php?u="+craftedURL+"&quote=Check out this book!";
+  $("#facebook-button").attr("href", facebookURL)
+
+  var linkedinURL = "http://www.linkedin.com/shareArticle?mini=true&url="+craftedURL+"&title=Check out this book!!&summary=&source="+craftedURL;
+  $("#linkedin-button").attr("href", linkedinURL)
+}
+
