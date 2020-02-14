@@ -203,6 +203,7 @@ function buyNow() {
   window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+" "+authorName);
   });
 }
+
 //experimental
 //
 //parse the URL parameter
