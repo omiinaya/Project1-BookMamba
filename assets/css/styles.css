@@ -88,3 +88,8 @@ body {
 .padding-left {
     padding-left: .5rem;
 }
+
+.dynamic-content {
+    color: white;
+    display: none;
+}
