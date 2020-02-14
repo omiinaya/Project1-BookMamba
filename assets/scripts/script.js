@@ -157,7 +157,6 @@ function quotesAjax(){
     quoteResponse = response;
     console.log(quoteResponse);
     shortenQuote()
-    expandQuote()
     $("#quote-spinner").hide();
     $("#quote-author").text("-"+response.contents.author);
     $("#nyTimes").show();
