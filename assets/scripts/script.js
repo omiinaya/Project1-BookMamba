@@ -25,6 +25,7 @@ function enterKey(){
   enterText.addEventListener("keyup", function(event) {
     if (event.keyCode===13) {
       event.preventDefault();
+      userInput = $("#search-bar").val();
       searchAjax();
     }
   });
@@ -34,8 +35,8 @@ function ratingFilter() {
   for (var i = 0; i < bookResponse.items.length; i++)
   if (bookResponse.items[i].volumeInfo.averageRating >= 4) {
     filteredBooks.push(bookResponse.items[i]);
-    console.log(filteredBooks);
   }
+  console.log(filteredBooks);
 }
 text_truncate = function(str, length, ending) {
   if (length == null) {
@@ -52,7 +53,10 @@ text_truncate = function(str, length, ending) {
 };
 //k
 function bookData() { //used to be called nextBook. renamed for readability.
-  noRepeats()
+  console.log(filteredBooks.length);
+  if (filteredBooks.length > 1) {
+    noRepeats()
+  }
   authorName = filteredBooks[random].volumeInfo.authors;
   titleName = filteredBooks[random].volumeInfo.title;
   $("#bookTitle").html(filteredBooks[random].volumeInfo.title);
@@ -121,9 +125,13 @@ while (random === lastrandom) {
   lastrandom = random;
 }
 
+function searchButton() {
+  userInput = $("#search-bar").val();
+  searchAjax()
+}
+
 function searchAjax() { //used to be called runAjax. renamed for readability.
   filteredBooks = [];
-  userInput = $("#search-bar").val();
   var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
   $.ajax({
     url: queryURL,
@@ -134,6 +142,18 @@ function searchAjax() { //used to be called runAjax. renamed for readability.
     console.log(bookResponse);
     ratingFilter()
     bookData()
+    $("#book-section").show();
+  });
+}
+
+function testAjax() {
+  var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    //assigning global variable bookResponse the value of repsonse so we can use response outside of this function.
+    console.log(response)
     $("#book-section").show();
   });
 }
@@ -206,24 +226,11 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 // Give the parameter a variable name
-var dynamicContent = getParameterByName('dc');
+var dynamicContent = getParameterByName('q');
 
 $(document).ready(function() {
 
-// Check if the URL parameter is apples
 if (dynamicContent) {
-  alert(dynamicContent);
+  userInput = dynamicContent;
+  searchAjax()
 } 
-// Check if the URL parameter is oranges
-else if (dynamicContent == 'oranges') {
-  $('#oranges').show();
-} 
-// Check if the URL parameter is bananas
-else if (dynamicContent == 'bananas') {
-  $('#bananas').show();
-} 
-// Check if the URL parmeter is empty or not defined, display default content
-else {
-  $('#default-content').show();
-}
-});
