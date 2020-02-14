@@ -25,6 +25,7 @@ function enterKey(){
   enterText.addEventListener("keyup", function(event) {
     if (event.keyCode===13) {
       event.preventDefault();
+      userInput = $("#search-bar").val();
       searchAjax();
     }
   });
@@ -34,8 +35,8 @@ function ratingFilter() {
   for (var i = 0; i < bookResponse.items.length; i++)
   if (bookResponse.items[i].volumeInfo.averageRating >= 4) {
     filteredBooks.push(bookResponse.items[i]);
-    console.log(filteredBooks);
   }
+  console.log(filteredBooks);
 }
 text_truncate = function(str, length, ending) {
   if (length == null) {
@@ -52,7 +53,11 @@ text_truncate = function(str, length, ending) {
 };
 //k
 function bookData() { //used to be called nextBook. renamed for readability.
-  noRepeats()
+  console.log(filteredBooks.length);
+  console.log(filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier);
+  if (filteredBooks.length > 1) {
+    noRepeats()
+  }
   authorName = filteredBooks[random].volumeInfo.authors;
   titleName = filteredBooks[random].volumeInfo.title;
   $("#bookTitle").html(filteredBooks[random].volumeInfo.title);
@@ -79,7 +84,7 @@ function shortenQuote() {
 }
 
 function shortenDescription() {
-  truncatedDescription = text_truncate('"'+filteredBooks[random].volumeInfo.description, 200);
+  truncatedDescription = text_truncate('"'+filteredBooks[random].volumeInfo.description+'"', 200);
   fullDescription = '"'+filteredBooks[random].volumeInfo.description+'"';
   var testDescription = filteredBooks[random].volumeInfo.description;
   if (typeof testDescription != "undefined") {
@@ -121,9 +126,13 @@ while (random === lastrandom) {
   lastrandom = random;
 }
 
+function searchButton() {
+  userInput = $("#search-bar").val();
+  searchAjax()
+}
+
 function searchAjax() { //used to be called runAjax. renamed for readability.
   filteredBooks = [];
-  userInput = $("#search-bar").val();
   var queryURL = "https://www.googleapis.com/books/v1/volumes?q="+userInput;
   $.ajax({
     url: queryURL,
@@ -134,6 +143,7 @@ function searchAjax() { //used to be called runAjax. renamed for readability.
     console.log(bookResponse);
     ratingFilter()
     bookData()
+    shareButtons()
     $("#book-section").show();
   });
 }
@@ -190,6 +200,44 @@ function topSellersAjax() {
 //giving buy now button functionality
 function buyNow() {
   $("#buyNowBtn").click(function() {
-  window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+authorName);
+  window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+" "+authorName);
   });
 }
+
+//experimental
+//
+//parse the URL parameter
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+// Give the parameter a variable name
+var dynamicContent = getParameterByName('q');
+
+$(document).ready(function() {
+
+if (dynamicContent) {
+  userInput = dynamicContent;
+  searchAjax()
+  }
+});
+
+function shareButtons() {
+  var ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
+  var craftedURL = "https://omiinaya.github.io/Project1/index.html?q="+ISBN;
+
+  var twitterURL = "https://twitter.com/intent/tweet?text=Check out this book! "+craftedURL;
+  $("#twitter-button").attr("href", twitterURL)
+
+  var facebookURL = "https://www.facebook.com/sharer/sharer.php?u="+craftedURL+"&quote=Check out this book!";
+  $("#facebook-button").attr("href", facebookURL)
+
+  var linkedinURL = "http://www.linkedin.com/shareArticle?mini=true&url="+craftedURL+"&title=Check out this book!!&summary=&source="+craftedURL;
+  $("#linkedin-button").attr("href", linkedinURL)
+}
+
