@@ -74,7 +74,7 @@ function bookData() { //used to be called nextBook. renamed for readability.
 }
 //o
 function shortenQuote() {
-  truncatedQuote = text_truncate('"'+quoteResponse.contents.quote+'"', 125); //creates a trimmed version of the quote received from JSON.
+  truncatedQuote = text_truncate('"'+quoteResponse.contents.quote+'"', 125); //creates a trimmed version of the quote. 125 character limit.
   fullQuote = '"'+quoteResponse.contents.quote+'"';
   if (quoteResponse.contents.quote.length > 125) {
     $("#quote-text").text(truncatedQuote);
@@ -157,6 +157,7 @@ function quotesAjax(){
     quoteResponse = response;
     console.log(quoteResponse);
     shortenQuote()
+    expandQuote()
     $("#quote-spinner").hide();
     $("#quote-author").text("-"+response.contents.author);
     $("#nyTimes").show();
@@ -200,7 +201,8 @@ function topSellersAjax() {
 //giving buy now button functionality
 function buyNow() {
   $("#buyNowBtn").click(function() {
-  window.open("http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+titleName+" "+authorName);
+  var ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
+  window.open("https://www.amazon.com/s?k="+ISBN+"&i=stripbooks&ref=sdp_tx_srch");
   });
 }
 
