@@ -84,7 +84,7 @@ function shortenQuote() {
 }
 
 function shortenDescription() {
-  truncatedDescription = text_truncate('"'+filteredBooks[random].volumeInfo.description, 200);
+  truncatedDescription = text_truncate('"'+filteredBooks[random].volumeInfo.description+'"', 200);
   fullDescription = '"'+filteredBooks[random].volumeInfo.description+'"';
   var testDescription = filteredBooks[random].volumeInfo.description;
   if (typeof testDescription != "undefined") {
