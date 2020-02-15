@@ -20,6 +20,7 @@ function loadPage() {
   buyNow()
   expandQuote()
   expandDescription()
+  readMore()
 }
 
 function enterKey(){
@@ -165,6 +166,7 @@ function quotesAjax(){
     $("#nyTimes").show();
   });
 }
+
 //k
 function topSellersAjax() {
   var queryURL = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=6ad84e249d054efeaefe1abb8f89df5b"
@@ -208,6 +210,7 @@ function buyNow() {
   });
 }
 
+//o
 //experimental
 //
 //parse the URL parameter
@@ -241,4 +244,34 @@ function shareButtons() {
   $("#facebook-button").attr("href", facebookURL)
   var linkedinURL = "http://www.linkedin.com/shareArticle?mini=true&url="+craftedURL+"&title=Check out this book!!&summary=&source="+craftedURL;
   $("#linkedin-button").attr("href", linkedinURL)
+}
+
+//k
+function readMore() {
+  $("#nytBook1").click(function() {
+      if (nyResponse.results.books[0].book_review_link == "") {
+        window.open(nyResponse.results.books[0].amazon_product_url);
+    } else {
+      window.open(nyResponse.results.books[0].book_review_link);
+
+    }
+  });
+  $("#nytBook2").click(function() {
+    if (nyResponse.results.books[1].book_review_link == "") {
+      window.open(nyResponse.results.books[1].amazon_product_url);
+  } else {
+    window.open(nyResponse.results.books[1].book_review_link);
+
+  }
+});
+$("#nytBook3").click(function() {
+  if (nyResponse.results.books[2].book_review_link == "") {
+    window.open(nyResponse.results.books[2].amazon_product_url);
+} else {
+  window.open(nyResponse.results.books[2].book_review_link);
+
+}
+});
+
+}
 }
