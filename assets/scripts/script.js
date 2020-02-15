@@ -249,8 +249,8 @@ function shareButtons() {
 //k
 function readMore() {
   $("#nytBook1").click(function() {
-      if (nyResponse.results.books[0].book_review_link == "") {
-        window.open(nyResponse.results.books[0].amazon_product_url);
+    if (nyResponse.results.books[0].book_review_link == "") {
+      window.open(nyResponse.results.books[0].amazon_product_url);
     } else {
       window.open(nyResponse.results.books[0].book_review_link);
 
@@ -261,17 +261,13 @@ function readMore() {
       window.open(nyResponse.results.books[1].amazon_product_url);
   } else {
     window.open(nyResponse.results.books[1].book_review_link);
-
-  }
-});
-$("#nytBook3").click(function() {
-  if (nyResponse.results.books[2].book_review_link == "") {
-    window.open(nyResponse.results.books[2].amazon_product_url);
-} else {
-  window.open(nyResponse.results.books[2].book_review_link);
-
-}
-});
-
-}
+    }
+  });
+  $("#nytBook3").click(function() {
+    if (nyResponse.results.books[2].book_review_link == "") {
+      window.open(nyResponse.results.books[2].amazon_product_url);
+  } else {
+    window.open(nyResponse.results.books[2].book_review_link);
+    }
+  });
 }
