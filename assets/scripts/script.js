@@ -46,7 +46,7 @@ text_truncate = function(str, length, ending) {
     length = 100;
   }
   if (ending == null) {
-    ending = '..." Read More';
+    ending = '..."';
   }
   if (str.length > length) {
     return str.substring(0, length - ending.length) + ending;
@@ -82,6 +82,7 @@ function shortenQuote() {
   fullQuote = '"'+quoteResponse.contents.quote+'"';
   if (quoteResponse.contents.quote.length > 125) {
     $("#quote-text").text(truncatedQuote);
+    $("#quote-more").show();
   } else {
     $("#quote-text").text(fullQuote);
   }
@@ -95,6 +96,7 @@ function shortenDescription() {
     if (testDescription.length > 200) {
     fullDescription = '"'+filteredBooks[random].volumeInfo.description+'"';
     $("#descriptionText").text(truncatedDescription)
+    $("#read-more").show();
     } else {
       $("#descriptionText").text(fullDescription)
     }
@@ -104,21 +106,29 @@ function shortenDescription() {
 }
 
 function expandQuote() {
-  $("#quote-text").click(function() {
+  $("#quote-more, #quote-less").click(function() {
     if ($("#quote-text").text() == truncatedQuote) { //if it's already trimmed, 
       $("#quote-text").text(fullQuote) //show full quote.
+      $("#quote-more").hide();
+      $("#quote-less").show();
     } else {
       $("#quote-text").text(truncatedQuote) //otherwise, trim quote.
+      $("#quote-more").show();
+      $("#quote-less").hide();
     }
   });
 }
 
 function expandDescription() {
-  $("#descriptionText").click(function() {
+  $("#read-more, #read-less").click(function() {
     if ($("#descriptionText").text() == truncatedDescription) {
       $("#descriptionText").text(fullDescription)
+      $("#read-more").hide();
+      $("#read-less").show();
     } else {
       $("#descriptionText").text(truncatedDescription)
+      $("#read-more").show();
+      $("#read-less").hide();
     }
   });
 }
