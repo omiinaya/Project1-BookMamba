@@ -10,6 +10,8 @@ var quoteResponse = "";
 var lastrandom = 0;
 var random = 0;
 
+var ISBN;
+
 //k
 function loadPage() {
   topSellersAjax()
@@ -54,6 +56,7 @@ text_truncate = function(str, length, ending) {
 };
 //k
 function bookData() { //used to be called nextBook. renamed for readability.
+  random = 0;
   console.log(filteredBooks.length);
   console.log(filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier);
   if (filteredBooks.length > 1) {
@@ -202,7 +205,7 @@ function topSellersAjax() {
 //giving buy now button functionality
 function buyNow() {
   $("#buyNowBtn").click(function() {
-  var ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
+  ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
   window.open("https://www.amazon.com/s?k="+ISBN+"&i=stripbooks&ref=sdp_tx_srch");
   });
 }
@@ -232,15 +235,13 @@ if (dynamicContent) {
 });
 
 function shareButtons() {
-  var ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
-  var craftedURL = "https://omiinaya.github.io/Project1/index.html?q="+ISBN;
+  ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
+  var craftedURL = "https://www.amazon.com/s?k="+ISBN+"&i=stripbooks&ref=sdp_tx_srch";
 
   var twitterURL = "https://twitter.com/intent/tweet?text=Check out this book! "+craftedURL;
   $("#twitter-button").attr("href", twitterURL)
-
   var facebookURL = "https://www.facebook.com/sharer/sharer.php?u="+craftedURL+"&quote=Check out this book!";
   $("#facebook-button").attr("href", facebookURL)
-
   var linkedinURL = "http://www.linkedin.com/shareArticle?mini=true&url="+craftedURL+"&title=Check out this book!!&summary=&source="+craftedURL;
   $("#linkedin-button").attr("href", linkedinURL)
 }
@@ -273,5 +274,4 @@ $("#nytBook3").click(function() {
 });
 
 }
-
-
+}
