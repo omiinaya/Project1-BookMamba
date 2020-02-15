@@ -93,3 +93,23 @@ body {
     color: white;
     display: none;
 }
+#read-more {
+    display:none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+#read-less {
+    display:none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+#quote-more {
+    display:none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+#quote-less {
+    display:none;
+    text-decoration: underline;
+    cursor: pointer;
+}
