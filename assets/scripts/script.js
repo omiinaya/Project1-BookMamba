@@ -1,6 +1,4 @@
 var userInput = "";
-var authorName="";
-var titleName="";
 var filteredBooks = [];
 
 var bookResponse = "";
@@ -57,13 +55,9 @@ text_truncate = function(str, length, ending) {
 //k
 function bookData() { //used to be called nextBook. renamed for readability.
   random = 0;
-  console.log(filteredBooks.length);
-  console.log(filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier);
   if (filteredBooks.length > 1) {
     noRepeats()
   }
-  authorName = filteredBooks[random].volumeInfo.authors;
-  titleName = filteredBooks[random].volumeInfo.title;
   $("#bookTitle").html(filteredBooks[random].volumeInfo.title);
   $("#authorSpan").text(filteredBooks[random].volumeInfo.authors);
   $("#publishedDate").text(filteredBooks[random].volumeInfo.publishedDate);
@@ -75,12 +69,13 @@ function bookData() { //used to be called nextBook. renamed for readability.
   } else {
     $("#bookCover").attr("src",filteredBooks[random].volumeInfo.imageLinks.thumbnail); 
   }
+  ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
 }
 //o
 function shortenQuote() {
-  truncatedQuote = text_truncate('"'+quoteResponse.contents.quote+'"', 125); //creates a trimmed version of the quote. 125 character limit.
-  fullQuote = '"'+quoteResponse.contents.quote+'"';
-  if (quoteResponse.contents.quote.length > 125) {
+  truncatedQuote = text_truncate('"'+quoteResponse.contents.quotes[0].quote+'"', 125); //creates a trimmed version of the quote. 125 character limit.
+  fullQuote = '"'+quoteResponse.contents.quotes[0].quote+'"';
+  if (quoteResponse.contents.quotes[0].quote.length > 125) {
     $("#quote-text").text(truncatedQuote);
     $("#quote-more").show();
   } else {
@@ -163,7 +158,7 @@ function searchAjax() { //used to be called runAjax. renamed for readability.
 }
 
 function quotesAjax(){
-  var queryURL = "https://quotes.rest/quote/random.json?api_key=c9kZNAbwJv_8tdUeQinJMQeF"
+  var queryURL = "https://quotes.rest/qod?category=inspire"
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -172,7 +167,7 @@ function quotesAjax(){
     console.log(quoteResponse);
     shortenQuote()
     $("#quote-spinner").hide();
-    $("#quote-author").text("-"+response.contents.author);
+    $("#quote-author").text("-"+response.contents.quotes[0].author);
     $("#nyTimes").show();
   });
 }
@@ -189,27 +184,10 @@ function topSellersAjax() {
     $("#rank-one-title").html(response.results.books[0].title);
     $("#rank-one-author").text(response.results.books[0].author);
     $("#bestSellerCover").attr("src",response.results.books[0].book_image);
-    if (response.results.books[0].book_review_link == "") {
-      $("#bestSellerLink").attr("href",response.results.books[0].amazon_product_url);
-    } else {
-      $("#bestSellerLink").attr("href",response.results.books[0].book_review_link);
-    }
-
-   $("#rank-two-title").html(response.results.books[1].title);
-   $("#rank-two-author").text(response.results.books[1].author);
-   if (response.results.books[1].book_review_link == "") {
-    $("#bestSellerLink2").attr("href",response.results.books[1].amazon_product_url);
-  } else {
-    $("#bestSellerLink2").attr("href",response.results.books[1].book_review_link);
-  }
-    
+    $("#rank-two-title").html(response.results.books[1].title);
+    $("#rank-two-author").text(response.results.books[1].author);
     $("#rank-three-title").html(response.results.books[2].title);
     $("#rank-three-author").text(response.results.books[2].author);
-   if (response.results.books[2].book_review_link == "") {
-    $("#bestSellerLink3").attr("href",response.results.books[2].amazon_product_url);
-  } else {
-    $("#bestSellerLink3").attr("href",response.results.books[2].book_review_link);
-  }
   });
 }
 //giving buy now button functionality
@@ -245,7 +223,6 @@ if (dynamicContent) {
 });
 
 function shareButtons() {
-  ISBN = filteredBooks[random].volumeInfo.industryIdentifiers[0].identifier;
   var craftedURL = "https://www.amazon.com/s?k="+ISBN+"&i=stripbooks&ref=sdp_tx_srch";
 
   var twitterURL = "https://twitter.com/intent/tweet?text=Check out this book! "+craftedURL;
