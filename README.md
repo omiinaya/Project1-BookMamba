@@ -4,9 +4,7 @@
 
 ## User Story
 
-As a book lover
-I want to find the most popular books in a given topic
-So I can read only the best books
+As a book lover, I want to find the most popular books in a given topic, so I can read only the best books.
 
 ## Purpose of the Application
 
