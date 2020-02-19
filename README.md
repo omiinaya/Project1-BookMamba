@@ -4,13 +4,13 @@
 
 ## User Story
 
-As a book lover  
-I want to find the most popular books in a given topic  
-So I can read the best books only
+As a book lover
+I want to find the most popular books in a given topic
+So I can read only the best books
 
 ## Purpose of the Application
 
-We developed a simple application where an user can search for books and receive the highest rated results we could find. The site also adds value to the user by displaying inspirational quotes and the top 3 books in the New York Times best sellers list.
+We developed a simple application where a user can search for books and receive information on the highest-rated results we could find. The site also adds value to the user by displaying inspirational quotes and the top three books on the New York Times best sellers list.
 
 The main purpose of the project is to apply all the knowledge we acquired in the first part of the UM Full Stack Developer Bootcamp 2019-2020.
 
@@ -30,7 +30,7 @@ The application's interface was built with the *Bulma* framework and custom css 
 
 ## Functionality
 
-On load, the page displays a random inspirational quote and the top 3 books from the New York Times best sellers list. At the top of the page, the user has a search bar where they can type in a keyword, title or ISBN. The user can click the search icon or press the "Enter" key. The application takes the user input and performs a request to the Google Books API, then the responses from the API are sorted to include only the top rated books. The user can click the "view next" button to get another high rated result.
+On loading, the page displays a random inspirational quote and the top three books from the New York Times best sellers list. At the top of the page, the user has a search bar where they can type in a keyword, title or ISBN. The user can click the search icon or press the "Enter" key. The application takes the user's input and performs a request to the Google Books API. Then the responses from the API are sorted to include only the top rated books. The user can click the "View Next" button to get another high rated result.
 
 ## User interface
 
