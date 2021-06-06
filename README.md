@@ -1,4 +1,4 @@
-# Book Mamba | https://omiinaya.github.io/BookMamba/
+# Book Mamba | https://omiinaya.github.io/Project1-BookMamba/
 
 # PROJECT 1: Book search API
 
