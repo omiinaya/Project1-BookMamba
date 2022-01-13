@@ -73,9 +73,9 @@ function bookData() { //used to be called nextBook. renamed for readability.
 }
 //o
 function shortenQuote() {
-  truncatedQuote = text_truncate('"'+quoteResponse.contents.quotes[0].quote+'"', 125); //creates a trimmed version of the quote. 125 character limit.
-  fullQuote = '"'+quoteResponse.contents.quotes[0].quote+'"';
-  if (quoteResponse.contents.quotes[0].quote.length > 125) {
+  truncatedQuote = text_truncate('"'+quoteResponse.text+'"', 125); //creates a trimmed version of the quote. 125 character limit.
+  fullQuote = '"'+quoteResponse.text+'"';
+  if (quoteResponse.text.length-1 > 125) {
     $("#quote-text").text(truncatedQuote);
     $("#quote-more").show();
   } else {
@@ -158,16 +158,19 @@ function searchAjax() { //used to be called runAjax. renamed for readability.
 }
 
 function quotesAjax(){
-  var queryURL = "https://quotes.rest/qod?category=inspire"
+  var queryURL = "https://type.fit/api/quotes"
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) { 
-    quoteResponse = response;
+    var data = JSON.parse(response)
+    var random = Math.floor(Math.random() * data.length-1);
+    console.log(random)
+    quoteResponse = data[random];
     console.log(quoteResponse);
-    shortenQuote()
+    shortenQuote(random)
     $("#quote-spinner").hide();
-    $("#quote-author").text("-"+response.contents.quotes[0].author);
+    $("#quote-author").text("-"+data[random].author);
     $("#nyTimes").show();
   });
 }
